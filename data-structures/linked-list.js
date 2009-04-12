@@ -4,31 +4,6 @@
  * See LICENSE for details on license.
  */
 
-//=================================================================
-// LinkedListNode Implementation
-//=================================================================
-
-//-----------------------------------------------------------------
-// Class LinkedListNode
-//-----------------------------------------------------------------
-// Author(s)
-//  Nicholas C. Zakas (NCZ), 9/5/02
-//
-// Description
-//  A linked list data node.
-//
-// Arguments
-//  vData (Variant) - the data to store in the node.
-//-----------------------------------------------------------------
-function LinkedListNode(vData) {
-    this.data = vData;      //the data for this node
-    this.next = null;       //pointer to next node in the list
-}
-
-//=================================================================
-// LinkedList Implementation
-//=================================================================
-
 /**
  * A linked list implementation in JavaScript.
  * @class LinkedList
@@ -68,28 +43,25 @@ LinkedList.prototype = {
     add: function (data){
     
         //create a new item object, place data in
-        var item = { 
+        var node = { 
                 data: data, 
                 next: null 
             },
             
             //used to traverse the structure
-            current,
-            previous;
+            current;
     
         //special case: no items in the list yet
         if (this._head === null){
-            this._head = item;
+            this._head = node;
         } else {
-            previous = this._head;
-            current = this._head.next;
+            current = this._head;
             
-            while(current){
-                previous = current;
+            while(current.next){
                 current = current.next;
             }
            
-            previous.next = item;            
+            current.next = node;            
         }
         
         //don't forget to update the count
