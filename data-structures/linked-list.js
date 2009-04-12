@@ -50,7 +50,7 @@ function LinkedList() {
      * @type Object
      * @private
      */
-    this._list = null;
+    this._head = null;
 }
 
 LinkedList.prototype = {
@@ -78,11 +78,11 @@ LinkedList.prototype = {
             previous;
     
         //special case: no items in the list yet
-        if (this._list === null){
-            this._list = item;
+        if (this._head === null){
+            this._head = item;
         } else {
-            previous = this._list;
-            current = this._list.next;
+            previous = this._head;
+            current = this._head.next;
             
             while(current){
                 previous = current;
@@ -109,7 +109,7 @@ LinkedList.prototype = {
     
         //check for out-of-bounds values
         if (index > -1 && index < this._length){
-            var current = this._list,
+            var current = this._head,
                 i = 0;
                 
             while(i++ < index){
@@ -134,13 +134,13 @@ LinkedList.prototype = {
         //check for out-of-bounds values
         if (index > -1 && index < this._length){
         
-            var current = this._list,
+            var current = this._head,
                 previous,
                 i = 0;
                 
             //special case: removing first item
             if (index === 0){
-                this._list = current.next;
+                this._head = current.next;
             } else {
         
                 //find the right location
@@ -181,7 +181,7 @@ LinkedList.prototype = {
      */
     toArray: function(){
         var result = [],
-            current = this._list;
+            current = this._head;
         
         while(current){
             result.push(current.data);
