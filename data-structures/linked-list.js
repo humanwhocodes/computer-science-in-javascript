@@ -21,7 +21,7 @@ function LinkedList() {
     
     /**
      * Pointer to first item in the list.
-     * @property _list
+     * @property _head
      * @type Object
      * @private
      */
