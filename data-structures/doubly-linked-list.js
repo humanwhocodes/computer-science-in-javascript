@@ -1,5 +1,5 @@
 /*
- * Double Linked List implementation in JavaScript
+ * Doubly Linked List implementation in JavaScript
  * Copyright (c) 2009 Nicholas C. Zakas
  * See LICENSE for details on license.
  */
@@ -53,7 +53,8 @@ DoublyLinkedList.prototype = {
         //create a new item object, place data in
         var node = { 
                 data: data, 
-                next: null 
+                next: null,
+                prev: null
             };
     
         //special case: no items in the list yet
