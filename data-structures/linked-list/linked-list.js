@@ -1,7 +1,7 @@
 /*
  * Linked List implementation in JavaScript
  * Copyright (c) 2009 Nicholas C. Zakas
- * See LICENSE for details on license.
+ * MIT Licensed - see LICENSE for details on license.
  */
 
 /**
