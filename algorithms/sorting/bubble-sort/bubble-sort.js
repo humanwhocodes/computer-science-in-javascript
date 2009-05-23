@@ -4,21 +4,6 @@
  * MIT Licensed - see LICENSE for details on license.
  */
  
-/**
- * A bubble sort implementation in JavaScript. The array
- * is sorted in-place.
- * @param {Array} items An array of items to sort.
- * @return {void}
- */
-function bubbleSort(items){
-    for (var i=items.length-1; i >= 0; i--){
-        for (var j=i; j >= 0; j--){
-            if (items[j] < items[j-1]){
-                swap(items, j, j-1);
-            }
-        }
-    }
-}
 
 /**
  * Swaps two values in an array.
@@ -31,4 +16,22 @@ function swap(items, firstIndex, secondIndex){
     var temp = items[firstIndex];
     items[firstIndex] = items[secondIndex];
     items[secondIndex] = temp;
+}
+ 
+/**
+ * A bubble sort implementation in JavaScript. The array
+ * is sorted in-place.
+ * @param {Array} items An array of items to sort.
+ * @return {Array} The sorted array.
+ */
+function bubbleSort(items){
+    for (var i=items.length-1; i >= 0; i--){
+        for (var j=i; j >= 0; j--){
+            if (items[j] < items[j-1]){
+                swap(items, j, j-1);
+            }
+        }
+    }
+    
+    return items;
 }
