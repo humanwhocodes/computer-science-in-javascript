@@ -20,19 +20,19 @@ function swap(items, firstIndex, secondIndex){
  
 /**
  * A bubble sort implementation in JavaScript. The array
- * is sorted in-place.
+ * is sorted in-place. This uses two reversed loops that
+ * count down instead of counting up.
  * @param {Array} items An array of items to sort.
  * @return {Array} The sorted array.
  */
 function bubbleSort(items){
-
     var len = items.length,
-        i, j, stop;
+        i, j;
 
-    for (i=0; i < len; i++){
-        for (j=0, stop=len-i; j < stop; j++){
-            if (items[j] > items[j+1]){
-                swap(items, j, j+1);
+    for (i=len-1; i >= 0; i--){
+        for (j=len-i; j >= 0; j--){
+            if (items[j] < items[j-1]){
+                swap(items, j, j-1);
             }
         }
     }
