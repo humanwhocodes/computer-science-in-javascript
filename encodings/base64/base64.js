@@ -107,53 +107,46 @@ function base64Encode(text){
  * @return {String} The base64-decoded string.
  */
 function base64Decode(text){
-
-    //local variables
-    var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-        part, code,
-        i=0, j=0,
-        padCount=0,
-        bits = [],
-        result = [];
         
     //first check for any unexpected input
     if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text))){
         throw new Error("Not a base64-encode string.");
-    }
-    
-    //remove any whitespace
-    text = text.replace(/\s/g, "");
-    
-    //determine if there's any padding
-    while(text.charAt(text.length-1) == "="){
-    
-        //increment pad count
-        padCount += 2;
-        
-        //remove last character and try again
-        text = text.substr(0, text.length-1);
     }    
-    
-    //create an array of binary digits representing the text
-    while (i < text.length){
-        part = digits.indexOf(text.charAt(i)).toString(2);
-        bits = bits.concat(padLeft(part.split(""), 6));
+
+    //local variables
+    var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+        cur, prev, digitNum,
+        i=0,
+        result = [];
+
+    //remove any whitespace and equals signs
+    text = text.replace(/[\s=]/g, "");
+        
+    //loop over each character
+    while(i < text.length){
+        
+        cur = digits.indexOf(text.charAt(i));
+        digitNum = i % 4;
+        
+        switch(digitNum){
+                
+            //case 0: do nothing, not enough info to work with
+            
+            case 1: //second digit
+                result.push(String.fromCharCode(prev << 2 | cur >> 4));
+                break;
+                
+            case 2: //third digit
+                result.push(String.fromCharCode((prev & 0x0f) << 4 | cur >> 2));
+                break;
+                
+            case 3: //fourth digit
+                result.push(String.fromCharCode((prev & 3) << 6 | cur));
+                break;
+        }
+        
+        prev = cur;
         i++;
-    }
-
-    //remove padding
-    bits = bits.slice(0, bits.length - padCount);
-    
-    //if there's not enough bits, probably means an equals sign is missing
-    //remove the extra bits
-    if (bits.length % 8 != 0){
-        bits = bits.slice(0, bits.length - bits.length % 8);
-    }
-
-    //transform what remains back into characters
-    while(bits.length){
-        part = bits.splice(0, 8).join("");
-        result.push(String.fromCharCode(parseInt(part, 2)));
     }
     
     //return a string
