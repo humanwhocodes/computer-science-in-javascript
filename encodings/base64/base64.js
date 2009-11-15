@@ -65,6 +65,11 @@ function base64Encode(text){
         quantaCount,
         bits = [],
         result = [];
+        
+    //verify that there are no characters out of range
+    if (/([^\u0000-\u00ff])/.test(text)){
+        throw new Error("Can't base64 encode non-ASCII characters.");
+    }
     
     //create an array of binary digits representing the text
     while(i < text.length){
@@ -75,7 +80,7 @@ function base64Encode(text){
 
     //figure out how many 24-bit quanta are in the array
     quantaCount = Math.floor(bits.length / 24);
-   
+
     //encode all bits
     encodeBits: while(true){
     
@@ -84,7 +89,7 @@ function base64Encode(text){
             for (j=0; j < 4; j++){
                 part = bits.splice(0, 6).join("");
                 index = parseInt(part,2);
-                result.push(digits[index]);
+                result.push(digits.charAt(index));
             }
         }
                 
