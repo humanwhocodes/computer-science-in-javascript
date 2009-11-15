@@ -19,36 +19,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- */
- 
-/**
- * Accepts an array of bits and pads with zeros to the left up to a certain
- * length.
- * @param {Array} bits An array of bits (strings either "0" or "1").
- * @param {int} length The length that the array of bits should be.
- * @return {Array} The array of bits.
- */
-function padLeft(bits, length){
-    while (bits.length < length){
-        bits.unshift("0");
-    }        
-    return bits;
-}
-
-/**
- * Accepts an array of bits and pads with zeros to the right up to a certain
- * length.
- * @param {Array} bits An array of bits (strings either "0" or "1").
- * @param {int} length The length that the array of bits should be.
- * @return {Array} The array of bits.
- */
-function padRight(bits, length){
-    while (bits.length < length){
-        bits.push("0");
-    }        
-    return bits;        
-}
- 
+ */ 
  
 /**
  * Base64-encodes a string of text.
