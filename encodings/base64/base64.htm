@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<h1>Doubly Linked List Tests</h1>
+<h1>Base64 Encoding/Decoding Tests</h1>
 <script type="text/javascript">
 
 YAHOO.namespace("test");
@@ -26,7 +26,7 @@ YAHOO.test.Base64 = (function(){
     var suite = new YAHOO.tool.TestSuite("Base64 Tests");
     
     //-------------------------------------------------------------------------
-    // Test Case for adding
+    // Test Case for encoding
     //-------------------------------------------------------------------------
     
     suite.add(new YAHOO.tool.TestCase({
@@ -52,6 +52,58 @@ YAHOO.test.Base64 = (function(){
             var result = base64Encode("Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.");
             assert.areEqual(expected, result);
         }
+    }));
+
+    //-------------------------------------------------------------------------
+    // Test Case for decoding
+    //-------------------------------------------------------------------------
+    
+    suite.add(new YAHOO.tool.TestCase({
+    
+        name : "Base 64 Decoding Tests",
+        
+        _should: {
+            error: {
+                testInvalidChar: new Error("Not a base64-encode string.")
+            }
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testMan: function(){            
+            var result = base64Decode("TWFu");
+            assert.areEqual("Man", result);                   
+        },
+        
+        testHelloWorld: function(){            
+            var result = base64Decode("SGVsbG8gd29ybGQ=");
+            assert.areEqual("Hello world", result);                   
+        },
+        
+        testPhrase: function(){
+            var result = base64Decode("TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=");
+            var expected = "Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.";
+            assert.areEqual(expected, result);
+        },
+        
+        testPhraseWithWhitespace: function(){
+            var result = base64Decode("TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24 sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHB hc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYn kgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aW\ndhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG\t9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=");
+            var expected = "Man is distinguished, not only by his reason, but by this singular passion from other animals, which is a lust of the mind, that by a perseverance of delight in the continued and indefatigable generation of knowledge, exceeds the short vehemence of any carnal pleasure.";
+            assert.areEqual(expected, result);
+        },
+        
+        testA: function(){
+            var expected = "a";
+            var result = base64Decode("YQ==");
+            assert.areEqual(expected, result);            
+        },
+        
+        testInvalidChar: function(){
+            base64Decode("TWF,JFU");
+        }
+        
     }));
 
 

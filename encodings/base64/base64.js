@@ -22,27 +22,40 @@
  */
  
 /**
+ * Accepts an array of bits and pads with zeros to the left up to a certain
+ * length.
+ * @param {Array} bits An array of bits (strings either "0" or "1").
+ * @param {int} length The length that the array of bits should be.
+ * @return {Array} The array of bits.
+ */
+function padLeft(bits, length){
+    while (bits.length < length){
+        bits.unshift("0");
+    }        
+    return bits;
+}
+
+/**
+ * Accepts an array of bits and pads with zeros to the right up to a certain
+ * length.
+ * @param {Array} bits An array of bits (strings either "0" or "1").
+ * @param {int} length The length that the array of bits should be.
+ * @return {Array} The array of bits.
+ */
+function padRight(bits, length){
+    while (bits.length < length){
+        bits.push("0");
+    }        
+    return bits;        
+}
+ 
+ 
+/**
  * Base64-encodes a string of text.
- * @param {String} text The text to encode
+ * @param {String} text The text to encode.
  * @return {String} The base64-encoded string.
  */
 function base64Encode(text){
-
-    //helper function to left-pad an array with zeros
-    function padLeft(bits, length){
-        while (bits.length < length){
-            bits.unshift("0");
-        }        
-        return bits;
-    }
-    
-    //helper function to right-pad an array with zeros
-    function padRight(bits, length){
-        while (bits.length < length){
-            bits.push("0");
-        }        
-        return bits;        
-    }
 
     //local variables
     var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
@@ -54,9 +67,10 @@ function base64Encode(text){
         result = [];
     
     //create an array of binary digits representing the text
-    for (; i < text.length; i++){
+    while(i < text.length){
         part = text.charCodeAt(i).toString(2);
         bits = bits.concat(padLeft(part.split(""), 8));
+        i++;
     }
 
     //figure out how many 24-bit quanta are in the array
@@ -91,6 +105,60 @@ function base64Encode(text){
     
     //add any padding to the result
     result.push(padding);
+    
+    //return a string
+    return result.join("");
+
+}
+
+/**
+ * Base64-decodes a string of text.
+ * @param {String} text The text to decode.
+ * @return {String} The base64-decoded string.
+ */
+function base64Decode(text){
+
+    //local variables
+    var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+        part, code,
+        i=0, j=0,
+        padCount=0,
+        bits = [],
+        result = [];
+        
+    //first check for any unexpected input
+    if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text))){
+        throw new Error("Not a base64-encode string.");
+    }
+    
+    //remove any whitespace
+    text = text.replace(/\s/g, "");
+    
+    //determine if there's any padding
+    while(text.charAt(text.length-1) == "="){
+    
+        //increment pad count
+        padCount += 2;
+        
+        //remove last character and try again
+        text = text.substr(0, text.length-1);
+    }    
+    
+    //create an array of binary digits representing the text
+    while (i < text.length){
+        part = digits.indexOf(text.charAt(i)).toString(2);
+        bits = bits.concat(padLeft(part.split(""), 6));
+        i++;
+    }
+
+    //remove padding
+    bits = bits.slice(0, bits.length - padCount);
+
+    //transform what remains back into characters
+    while(bits.length){
+        part = bits.splice(0, 8).join("");
+        result.push(String.fromCharCode(parseInt(part, 2)));
+    }
     
     //return a string
     return result.join("");
