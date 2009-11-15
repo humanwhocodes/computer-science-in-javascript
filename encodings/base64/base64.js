@@ -160,10 +160,17 @@ function base64Decode(text){
 
     //remove padding
     bits = bits.slice(0, bits.length - padCount);
+    
+    //if there's not enough bits, probably means an equals sign is missing
+    //remove the extra bits
+    if (bits.length % 8 != 0){
+        bits = bits.slice(0, bits.length - bits.length % 8);
+    }
 
     //transform what remains back into characters
     while(bits.length){
         part = bits.splice(0, 8).join("");
+        console.log(part);
         result.push(String.fromCharCode(parseInt(part, 2)));
     }
     

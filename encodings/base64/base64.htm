@@ -110,6 +110,12 @@ YAHOO.test.Base64 = (function(){
             assert.areEqual(expected, result);            
         },
         
+        testMissingPaddingIndicator: function(){
+            var expected = "hatch";
+            var result = base64Decode("aGF0Y2g");
+            assert.areEqual(expected, result);            
+        },
+        
         testInvalidChar: function(){
             base64Decode("TWF,JFU");
         }
