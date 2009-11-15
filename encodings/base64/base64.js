@@ -56,66 +56,49 @@ function padRight(bits, length){
  * @return {String} The base64-encoded string.
  */
 function base64Encode(text){
-
-    //local variables
-    var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-        part, index,
-        i=0, j=0,
-        padding="",
-        quantaCount,
-        bits = [],
-        result = [];
         
-    //verify that there are no characters out of range
     if (/([^\u0000-\u00ff])/.test(text)){
         throw new Error("Can't base64 encode non-ASCII characters.");
-    }
+    }   
+ 
+    var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+        i = 0,
+        cur, prev, byteNum,
+        result=[];      
     
-    //create an array of binary digits representing the text
     while(i < text.length){
-        part = text.charCodeAt(i).toString(2);
-        bits = bits.concat(padLeft(part.split(""), 8));
+        
+        cur = text.charCodeAt(i);
+        byteNum = i % 3;
+        
+        switch(byteNum){
+            case 0: //first byte
+                result.push(digits.charAt(cur >> 2));
+                break;
+                
+            case 1: //second byte
+                result.push(digits.charAt((prev & 3) << 4 | (cur >> 4)));
+                break;
+                
+            case 2: //third byte
+                result.push(digits.charAt((prev & 0x0f) << 2 | (cur >> 6)));
+                result.push(digits.charAt(cur & 0x3f));
+                break;
+        }
+        
+        prev = cur;
         i++;
     }
-
-    //figure out how many 24-bit quanta are in the array
-    quantaCount = Math.floor(bits.length / 24);
-
-    //encode all bits
-    encodeBits: while(true){
     
-        //must encode one complete quanta at a time
-        for(i=0; i < quantaCount; i++){
-            for (j=0; j < 4 && bits.length; j++){
-                part = bits.splice(0, 6).join("");
-                index = parseInt(part,2);
-                result.push(digits.charAt(index));
-            }
-        }
-                
-        //take care of any extra bits
-        switch(bits.length){
-            case 8:
-                padRight(bits, 12);
-                padding = "==";
-                quantaCount = 1;
-                continue encodeBits;
-            case 16:
-                padRight(bits, 18);
-                padding = "=";
-                quantaCount = 1;
-                continue encodeBits;
-            default:
-                break encodeBits;
-        }
+    if (byteNum == 0){
+        result.push(digits.charAt((prev & 3) << 4));
+        result.push("==");
+    } else if (byteNum == 1){
+        result.push(digits.charAt((prev & 0x0f) << 2));
+        result.push("=");
     }
-    
-    //add any padding to the result
-    result.push(padding);
-    
-    //return a string
+ 
     return result.join("");
-
 }
 
 /**
