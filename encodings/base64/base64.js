@@ -81,7 +81,7 @@ function base64Decode(text){
         
     //first check for any unexpected input
     if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text))){
-        throw new Error("Not a base64-encode string.");
+        throw new Error("Not a base64-encoded string.");
     }    
 
     //local variables
