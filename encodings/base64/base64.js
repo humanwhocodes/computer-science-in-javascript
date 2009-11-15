@@ -101,7 +101,7 @@ function base64Decode(text){
         
         switch(digitNum){
                 
-            //case 0: do nothing, not enough info to work with
+            //case 0: first digit - do nothing, not enough info to work with
             
             case 1: //second digit
                 result.push(String.fromCharCode(prev << 2 | cur >> 4));
