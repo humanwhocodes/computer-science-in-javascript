@@ -170,7 +170,6 @@ function base64Decode(text){
     //transform what remains back into characters
     while(bits.length){
         part = bits.splice(0, 8).join("");
-        console.log(part);
         result.push(String.fromCharCode(parseInt(part, 2)));
     }
     
