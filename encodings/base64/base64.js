@@ -86,7 +86,7 @@ function base64Encode(text){
     
         //must encode one complete quanta at a time
         for(i=0; i < quantaCount; i++){
-            for (j=0; j < 4; j++){
+            for (j=0; j < 4 && bits.length; j++){
                 part = bits.splice(0, 6).join("");
                 index = parseInt(part,2);
                 result.push(digits.charAt(index));
@@ -98,10 +98,12 @@ function base64Encode(text){
             case 8:
                 padRight(bits, 12);
                 padding = "==";
+                quantaCount = 1;
                 continue encodeBits;
             case 16:
                 padRight(bits, 18);
                 padding = "=";
+                quantaCount = 1;
                 continue encodeBits;
             default:
                 break encodeBits;
