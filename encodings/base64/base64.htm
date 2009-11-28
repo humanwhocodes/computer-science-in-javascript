@@ -74,7 +74,9 @@ YAHOO.test.Base64 = (function(){
         
         _should: {
             error: {
-                testInvalidChar: new Error("Not a base64-encoded string.")
+                testInvalidChar: new Error("Not a base64-encoded string."),
+                testInvalidString: new Error("Not a base64-encoded string."),
+                testMissingPaddingIndicator: new Error("Not a base64-encoded string.")
             }
         },
 
@@ -117,8 +119,13 @@ YAHOO.test.Base64 = (function(){
         },
         
         testInvalidChar: function(){
-            base64Decode("TWF,JFU");
+            base64Decode("aGF,0Y2g");
+        },
+        
+        testInvalidString: function(){
+            base64Decode("aGF0Y2g==");
         }
+        
         
     }));
 

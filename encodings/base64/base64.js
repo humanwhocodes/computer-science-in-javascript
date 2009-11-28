@@ -79,8 +79,11 @@ function base64Encode(text){
  */
 function base64Decode(text){
         
+    //ignore white space
+    text = text.replace(/\s/g,"");
+        
     //first check for any unexpected input
-    if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text))){
+    if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text)) | text.length % 4 > 0){
         throw new Error("Not a base64-encoded string.");
     }    
 
@@ -91,7 +94,7 @@ function base64Decode(text){
         result = [];
 
     //remove any whitespace and equals signs
-    text = text.replace(/[\s=]/g, "");
+    text = text.replace(/=/g, "");
         
     //loop over each character
     while(i < text.length){
