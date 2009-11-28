@@ -83,7 +83,7 @@ function base64Decode(text){
     text = text.replace(/\s/g,"");
         
     //first check for any unexpected input
-    if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text)) | text.length % 4 > 0){
+    if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text)) || text.length % 4 > 0){
         throw new Error("Not a base64-encoded string.");
     }    
 
