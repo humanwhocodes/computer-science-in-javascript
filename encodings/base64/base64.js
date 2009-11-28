@@ -93,7 +93,7 @@ function base64Decode(text){
         i=0,
         result = [];
 
-    //remove any whitespace and equals signs
+    //remove any equals signs
     text = text.replace(/=/g, "");
         
     //loop over each character
