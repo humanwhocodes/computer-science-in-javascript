@@ -1,6 +1,6 @@
 /*
  * Iterative merge sort implementation in JavaScript
- * Copyright (c) 2009 Nicholas C. Zakas
+ * Copyright (c) 2009-2011 Nicholas C. Zakas
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,13 @@ function merge(left, right){
         }
     }
 
-    return result.concat(left).concat(right);
+    result = result.concat(left).concat(right);
+    
+    //make sure remaining arrays are empty
+    left.splice(0, left.length);
+    right.splice(0, right.length);
+    
+    return result;
 }
 
 /**
@@ -59,7 +65,7 @@ function mergeSort(items){
     }
     work.push([]);  //in case of odd number of items
 
-    for (var lim=len; lim > 1; lim = (lim+1)/2){
+    for (var lim=len; lim > 1; lim = Math.floor((lim+1)/2)){
         for (var j=0,k=0; k < lim; j++, k+=2){
             work[j] = merge(work[k], work[k+1]);
         }
