@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Linked List Tests</title>
+<title>Hash Table Tests</title>
 <!-- Combo-handled YUI CSS files: -->
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/logger/assets/logger.css&2.7.0/build/yuitest/assets/testlogger.css">
 <!-- Combo-handled YUI JS files: -->
@@ -178,7 +178,118 @@ YAHOO.test.HashTable = (function(){
 			assert.isUndefined(this.ht._items["invalidkey"], "The 'invalidkey' index should be undefined.");
             assert.isNull(this.ht.get("invalidkey"), "'invalidkey' should return null on a get.");
         }  		
-    }));        
+    })); 
+
+	suite.add(new YAHOO.tool.TestCase({
+    
+        name : "getKeys() Tests",
+
+        setUp: function(){
+            this.ht = new HashTable();
+        },
+        
+        tearDown: function(){
+            delete this.ht;
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testGetKeysForEmptyList: function(){
+            var value = this.ht.getKeys();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(0, value.length, "Array should be empty.");
+        },
+        
+        testGetKeysForOneItemList: function(){
+            this.ht.set("key1", "val1");
+            var value = this.ht.getKeys();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(1, value.length, "Array should have 1 item.");
+            assert.areEqual("key1", value[0], "The only item should be 'key1'.");
+        },
+        
+        testGetKeysForTwoItemList: function(){
+            this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            var value = this.ht.getKeys();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(2, value.length, "Array should have 2 items.");
+            assert.areEqual("key1", value[0], "The first item should be 'key1'.");
+            assert.areEqual("key2", value[1], "The second item should be 'key2'.");
+        },
+        
+        testGetKeysForMultipleItems: function(){
+            this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            this.ht.set("key3", "val3");
+            this.ht.set("key4", "val4");
+            this.ht.set("key5", "val5");
+            this.ht.set("key6", "val6");
+            this.ht.set("key7", "val7");
+            var value = this.ht.getKeys();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(7, value.length, "Array should have 7 items.");
+            YAHOO.util.ArrayAssert.itemsAreEqual(["key1", "key2", "key3", "key4", "key5", "key6", "key7",], value);    
+        }   
+    }));    
+	
+	suite.add(new YAHOO.tool.TestCase({
+    
+        name : "getValues() Tests",
+
+        setUp: function(){
+            this.ht = new HashTable();
+        },
+        
+        tearDown: function(){
+            delete this.ht;
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testGetValuesForEmptyList: function(){
+            var value = this.ht.getValues();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(0, value.length, "Array should be empty.");
+        },
+        
+        testGetValuesForOneItemList: function(){
+            this.ht.set("key1", "val1");
+            var value = this.ht.getValues();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(1, value.length, "Array should have 1 item.");
+            assert.areEqual("val1", value[0], "The only item should be 'val1'.");
+        },
+        
+        testGetValuesForTwoItemList: function(){
+            this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            var value = this.ht.getValues();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(2, value.length, "Array should have 2 items.");
+            assert.areEqual("val1", value[0], "The first item should be 'val1'.");
+			assert.areEqual("val2", value[1], "The second item should be 'val2'.");
+        },
+        
+        testGetValuesForMultipleItems: function(){
+            this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            this.ht.set("key3", "val3");
+            this.ht.set("key4", "val4");
+            this.ht.set("key5", "val5");
+            this.ht.set("key6", "val6");
+            this.ht.set("key7", "val7");
+            var value = this.ht.getValues();
+            assert.isInstanceOf(Array, value, "Value should be an array.");
+            assert.areEqual(7, value.length, "Array should have 7 items.");
+            YAHOO.util.ArrayAssert.itemsAreEqual(["val1", "val2", "val3", "val4", "val5", "val6", "val7",], value);    
+        }   
+    }));  
+	
 	
 	//return it
     return suite;
