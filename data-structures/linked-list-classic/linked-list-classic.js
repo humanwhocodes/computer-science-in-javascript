@@ -124,13 +124,15 @@ LinkedList.prototype = {
             } else {
         
                 //find the right location
-                while(i++ < index){
+                while(i++ < index && current != null){
                     previous = current;
                     current = current.next;            
                 }
-            
-                //skip over the item to remove
-                previous.next = current.next;
+				
+				if(current != null) {
+					//skip over the item to remove
+					previous.next = current.next;
+				}
             }
         
             //return the value

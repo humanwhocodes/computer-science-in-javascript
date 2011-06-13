@@ -157,7 +157,12 @@ YAHOO.test.LinkedList = (function(){
             assert.areEqual("Hi", this.list.item(0), "First item should now be 'Hi'.");
             assert.areEqual("Yo", this.list.item(1), "Last item should now be 'Yo'.");
             assert.isNull(this.list.item(2), "Item in position 2 should be null.");
-        }                
+        },
+
+		testRemoveInvalidItem: function(){
+			var value = this.list.remove(3);
+			assert.isNull(value, "Remove should return null on index out of bounds.");
+		}
     }));        
 
     //-------------------------------------------------------------------------
