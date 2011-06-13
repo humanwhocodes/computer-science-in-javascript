@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>Linked List Tests</title>
+<!-- Combo-handled YUI CSS files: -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/logger/assets/logger.css&2.7.0/build/yuitest/assets/testlogger.css">
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/logger/logger-min.js&2.7.0/build/yuitest/yuitest-min.js"></script>
+<script type="text/javascript" src="hash-table.js"></script>
+
+
+</head>
+<body>
+<h1>Hash Table Tests</h1>
+<script type="text/javascript">
+
+YAHOO.namespace("test");
+
+YAHOO.test.HashTable = (function(){
+
+	var assert = YAHOO.util.Assert;
+    
+    //-------------------------------------------------------------------------
+    // Base Test Suite
+    //-------------------------------------------------------------------------
+    
+    var suite = new YAHOO.tool.TestSuite("Hash Table Tests");
+    
+    //-------------------------------------------------------------------------
+    // Test Case for setting (insert)
+    //-------------------------------------------------------------------------
+    
+    suite.add(new YAHOO.tool.TestCase({
+    
+        name : "set() Tests",
+
+        setUp: function(){
+            this.ht = new HashTable();
+        },
+        
+        tearDown: function(){
+            delete this.ht;
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testSetSingle: function(){
+            this.ht.set("key1", "val1");
+            
+            assert.areEqual(1, this.ht.size(), "HashTable should have one item.");
+			assert.isNotUndefined(this.ht._items["key1"], "The key1 index should not be undefined.");
+            assert.areEqual("val1", this.ht._items["key1"], "The data at 'key1' should be 'val1'.");
+        },
+		
+		testSetMultiple: function(){
+            this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            
+            assert.areEqual(2, this.ht.size(), "HashTable should have two items.");
+			assert.isNotUndefined(this.ht._items["key1"], "The key1 index should not be undefined.");
+			assert.isNotUndefined(this.ht._items["key2"], "The key2 index should not be undefined.");
+            assert.areEqual("val1", this.ht._items["key1"], "The data at 'key1' should be 'val1'.");
+            assert.areEqual("val2", this.ht._items["key2"], "The data at 'key2' should be 'val2'.");
+        },
+		
+		testSetExisting: function(){
+			this.ht.set("key1", "val1");
+			
+            assert.areEqual("val1", this.ht._items["key1"], "The data at 'key1' should be 'val1'.");
+			
+			this.ht.set("key1", "val2");
+			
+			assert.areEqual(1, this.ht.size(), "HashTable should have one item.");
+			assert.areEqual("val2", this.ht._items["key1"], "The data at 'key1' should be 'val2'.");
+		}
+    }));
+	
+	//return it
+    return suite;
+})();
+
+(function (){
+    //create the logger
+    var logger = new YAHOO.tool.TestLogger();
+    
+    //add the tests
+    YAHOO.tool.TestRunner.add(YAHOO.test.HashTable);
+    YAHOO.tool.TestRunner.run();
+
+})();
+
+
+</script>
+</body>
+</html>

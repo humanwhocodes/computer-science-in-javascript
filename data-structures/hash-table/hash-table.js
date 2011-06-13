@@ -36,7 +36,10 @@ HashTable.prototype = {
 		if(key === null || value === null) {
 			return false;
 		}
-		this._length++;
+		if(typeof(this._items[key]) == "undefined") {
+			this._length++;
+		}
+		
 		return this._items[key] = value;
 	},
 
