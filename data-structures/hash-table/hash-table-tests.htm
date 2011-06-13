@@ -76,6 +76,110 @@ YAHOO.test.HashTable = (function(){
 		}
     }));
 	
+	//-------------------------------------------------------------------------
+    // Test Case for get() (Retrieve)
+    //-------------------------------------------------------------------------
+    
+    suite.add(new YAHOO.tool.TestCase({
+    
+        name : "get() Tests",
+
+        setUp: function(){
+            this.ht = new HashTable();
+			this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            this.ht.set("key3", "val3");
+        },
+        
+        tearDown: function(){
+            delete this.ht;
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testGetFirstItem: function(){
+            var value = this.ht.get("key1");
+            assert.areEqual("val1", value, "First item should be 'val1'.");
+        },
+        
+        testGetMiddleItem: function(){
+            var value = this.ht.get("key2");
+            assert.areEqual("val2", value, "First item should be 'val2'.");                
+        },
+        
+        testGetLastItem: function(){
+            var value = this.ht.get("key3");
+            assert.areEqual("val3", value, "First item should be 'val3'.");                  
+        },
+
+        testGetInvalidItem: function(){
+            var value = this.ht.get("invalidkey");
+            assert.isNull(value, "Invalid items should return null.");                   
+        },
+    }));
+	
+	//-------------------------------------------------------------------------
+    // Test Case for removing values
+    //-------------------------------------------------------------------------
+    
+    suite.add(new YAHOO.tool.TestCase({
+    
+        name : "remove() Tests",
+
+        setUp: function(){
+            this.ht = new HashTable();
+			this.ht.set("key1", "val1");
+            this.ht.set("key2", "val2");
+            this.ht.set("key3", "val3");
+        },
+        
+        tearDown: function(){
+            delete this.ht;
+        },
+
+        //---------------------------------------------------------------------
+        // Tests
+        //---------------------------------------------------------------------
+    
+        testRemoveFirstItem: function(){
+            var value = this.ht.remove("key1");
+            assert.areEqual("val1", value, "Removed item should be 'val1'.");
+            assert.areEqual(2, this.ht.size(), "There should only be two items left.");
+            assert.areEqual("val2", this.ht.get("key2"), "'key2' should still point to 'val2'.");
+            assert.areEqual("val3", this.ht.get("key3"), "'key3' should still point to 'val3'.");
+			assert.isUndefined(this.ht._items["key1"], "The key1 index should be undefined.");
+            assert.isNull(this.ht.get("key1"), "'key1' should return null on a get.");
+        },
+        
+        testRemoveMiddleItem: function(){
+            var value = this.ht.remove("key2");
+            assert.areEqual("val2", value, "Removed item should be 'val2'.");
+            assert.areEqual(2, this.ht.size(), "There should only be two items left.");
+            assert.areEqual("val1", this.ht.get("key1"), "'key1' should still point to 'val1'.");
+            assert.areEqual("val3", this.ht.get("key3"), "'key3' should still point to 'val3'.");
+			assert.isUndefined(this.ht._items["key2"], "The key2 index should be undefined.");
+            assert.isNull(this.ht.get("key2"), "'key2' should return null on a get.");
+        },
+        
+        testRemoveLastItem: function(){
+            var value = this.ht.remove("key3");
+            assert.areEqual("val3", value, "Removed item should be 'val3'.");
+            assert.areEqual(2, this.ht.size(), "There should only be two items left.");
+            assert.areEqual("val1", this.ht.get("key1"), "'key1' should still point to 'val1'.");
+            assert.areEqual("val2", this.ht.get("key2"), "'key2' should still point to 'val2'.");
+			assert.isUndefined(this.ht._items["key3"], "The key3 index should be undefined.");
+            assert.isNull(this.ht.get("key3"), "'key3' should return null on a get.");
+        },
+
+		testRemoveInvalidItem: function(){
+            var value = this.ht.remove("invalidkey");
+			assert.isUndefined(this.ht._items["invalidkey"], "The 'invalidkey' index should be undefined.");
+            assert.isNull(this.ht.get("invalidkey"), "'invalidkey' should return null on a get.");
+        }  		
+    }));        
+	
 	//return it
     return suite;
 })();
