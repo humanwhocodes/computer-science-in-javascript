@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Queue Example</title>
+    <script language="javascript" type="text/javascript" src="linkedlist.js"></script>
+    <script language="javascript" type="text/javascript" src="queue.js"></script>
+</head>
+<body>
+    <h2>Queue Example</h2>
+    <hr />
+  <script>
+
+//test creating the queue
+var oQueue = new Queue;
+
+//test the put() method
+oQueue.put("red");
+oQueue.put("orange");
+oQueue.put("yellow");
+
+//test the toString() method
+document.write("<p><b>Original Queue: </b><br />" + oQueue + "</p>");
+
+//test the get() method
+var vItem = oQueue.get();
+document.write("<p><b>Queue after getting first item: </b><br />" + oQueue + "<br /><b>Removed Item: </b><br />" + vItem + "</p>");
+
+//test the get() method
+var vItem2 = oQueue.get();
+document.write("<p><b>Queue after getting first item: </b><br />" + oQueue + "<br /><b>Removed Item: </b><br />" + vItem2 + "</p>");
+
+//test the isEmpty() method
+document.write("<p><b>Is Queue empty?: </b><br />" + oQueue.isEmpty() + "</p>");
+
+//test the get() method
+var vItem3 = oQueue.get();
+document.write("<p><b>Queue after getting first item: </b><br />" + oQueue + "<br /><b>Removed Item: </b><br />" + vItem3 + "</p>");
+
+//test the isEmpty() method
+document.write("<p><b>Is Queue empty?: </b><br />" + oQueue.isEmpty() + "</p>");
+
+   </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Stack Example</title>
+    <script language="javascript" type="text/javascript" src="linkedlist.js"></script>
+    <script language="javascript" type="text/javascript" src="stack.js"></script>
+</head>
+<body>
+    <h2>Stack Example</h2>
+    <hr />
+  <script>
+
+//test creating the stack
+var oStack = new Stack;
+
+//test the push() method
+oStack.push("red");
+oStack.push("orange");
+oStack.push("yellow");
+
+//test the toString() method
+document.write("<p><b>Original Stack: </b><br />" + oStack + "</p>");
+
+//test the pop() method
+var vItem = oStack.pop();
+document.write("<p><b>Stack after popping: </b><br />" + oStack + "<br /><b>Popped Item: </b><br />" + vItem + "</p>");
+
+//test the isEmpty() method
+document.write("<p><b>Is Stack empty?: </b><br />" + oStack.isEmpty() + "</p>");
+oStack.pop();
+oStack.pop();
+document.write("<p><b>Stack after popping two more items: </b><br />" + oStack + "</p>");
+document.write("<p><b>Is Stack empty?: </b><br />" + oStack.isEmpty() + "</p>");
+
+   </script>
+  </body>
+</html>
