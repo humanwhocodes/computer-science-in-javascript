@@ -44,7 +44,7 @@ function swap(items, firstIndex, secondIndex){
 function selectionSort(items){
 
     var len = items.length,
-        min;
+        min, i, j;
 
     for (i=0; i < len; i++){
     
