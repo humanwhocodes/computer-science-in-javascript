@@ -29,17 +29,19 @@
  * @return {Array} The merged array.
  */
 function merge(left, right){
-    var result = [];
+    var result  = [],
+        il      = 0,
+        ir      = 0;
 
-    while (left.length > 0 && right.length > 0){
-        if (left[0] < right[0]){
-            result.push(left.shift());
+    while (il < left.length && ir < right.length){
+        if (left[il] < right[ir]){
+            result.push(left[il++]);
         } else {
-            result.push(right.shift());
+            result.push(right[ir++]);
         }
     }
 
-    return result.concat(left).concat(right);
+    return result.concat(left.slice(il)).concat(right.slice(ir));
 }
 
 /**
@@ -50,7 +52,7 @@ function merge(left, right){
  */
 function mergeSort(items){
 
-    if (items.length == 1) {
+    if (items.length < 2) {
         return items;
     }
 
