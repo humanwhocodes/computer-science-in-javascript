@@ -1,6 +1,6 @@
 /*
- * Iterative merge sort implementation in JavaScript
- * Copyright (c) 2009-2011 Nicholas C. Zakas
+ * Recursive merge sort implementation in JavaScript
+ * Copyright (c) 2012 Nicholas C. Zakas
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
+
 /**
  * Merges to arrays in order based on their natural
  * relationship.
@@ -29,23 +29,19 @@
  * @return {Array} The merged array.
  */
 function merge(left, right){
-    var result = [];
+    var result  = [],
+        il      = 0,
+        ir      = 0;
 
-    while (left.length > 0 && right.length > 0){
-        if (left[0] < right[0]){
-            result.push(left.shift());
+    while (il < left.length && ir < right.length){
+        if (left[il] < right[ir]){
+            result.push(left[il++]);
         } else {
-            result.push(right.shift());
+            result.push(right[ir++]);
         }
     }
 
-    result = result.concat(left).concat(right);
-    
-    //make sure remaining arrays are empty
-    left.splice(0, left.length);
-    right.splice(0, right.length);
-    
-    return result;
+    return result.concat(left.slice(il)).concat(right.slice(ir));
 }
 
 /**
@@ -56,27 +52,17 @@ function merge(left, right){
  */
 function mergeSort(items){
 
-    // Terminal condition - don't need to do anything for arrays with 0 or 1 items
     if (items.length < 2) {
         return items;
     }
 
-    var work = [],
-        i,
-        len;
-        
-        
-    for (i=0, len=items.length; i < len; i++){
-        work.push([items[i]]);
-    }
-    work.push([]);  //in case of odd number of items
-
-    for (var lim=len; lim > 1; lim = Math.floor((lim+1)/2)){
-        for (var j=0,k=0; k < lim; j++, k+=2){
-            work[j] = merge(work[k], work[k+1]);
-        }
-        work[j] = [];  //in case of odd number of items
-    }
-
-    return work[0];
+    var middle = Math.floor(items.length / 2),
+        left    = items.slice(0, middle),
+        right   = items.slice(middle),
+        params = merge(mergeSort(left), mergeSort(right));
+    
+    // Add the arguments to replace everything between 0 and last item in the array
+    params.unshift(0, items.length);
+    items.splice.apply(items, params);
+    return items;
 }
