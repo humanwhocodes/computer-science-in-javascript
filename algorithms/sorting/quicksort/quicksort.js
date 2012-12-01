@@ -36,7 +36,7 @@ function swap(items, firstIndex, secondIndex){
 
 function partition(items, left, right) {
 
-    var pivot   = items[Math.ceil((right + left) / 2)],  // pivot value is middle item
+    var pivot   = items[Math.floor((right + left) / 2)],  // pivot value is middle item
         i       = left,     // starts from left and goes right to pivot index
         j       = right;    // starts from right and goes left to pivot index
 
@@ -94,7 +94,7 @@ function quickSort(items, left, right) {
         }
 
         if (index < right) {
-            quickSort(items, index + 1, right);
+            quickSort(items, index, right);
         }
 
     }
