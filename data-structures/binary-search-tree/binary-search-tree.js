@@ -265,6 +265,7 @@ BinarySearchTree.prototype = {
                         //reset pointers for new traversal
                         replacement = current.left;
                         replacementParent = current;
+
                         
                         //find the right-most node
                         while(replacement.right !== null){
@@ -272,7 +273,14 @@ BinarySearchTree.prototype = {
                             replacement = replacement.right;                            
                         }
                     
-                        replacementParent.right = replacement.left;
+
+                        if (replacementParent.right === replacement) {
+                            replacementParent.right = replacement.left;
+                        } else { 
+                            //replacement will be on the left when the left most subtree
+                            //of the node to remove has no children to the right
+                            replacementParent.left = replacement.left;
+                        }
                         
                         //assign children to the replacement
                         replacement.right = current.right;
