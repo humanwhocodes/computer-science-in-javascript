@@ -17,14 +17,15 @@ function swap(items, firstIndex, secondIndex){
  * @return {Array} The sorted array.
  */
 function shellSort(items) {
-	var	step = items.length,
-		i, j;
+	var len = items.length
+	    step = len,
+	    i, j;
 
 	do {
 		step = Math.floor(step/2);
 		i = 0;
 		j = i + step;
-		while (j < arr.length) {
+		while (j < len) {
 			if (items[i] > items[j]) {
 				swap(items, i, j);
 			}
