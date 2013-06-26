@@ -27,4 +27,7 @@ http://www.nczonline.net/blog/2009/04/13/computer-science-in-javascript-linked-l
 Selection Sort
 http://www.nczonline.net/blog/2009/09/08/computer-science-in-javascript-selection-sort/
 
+Damerau-Levenshtein Distance Sort
+http://en.wikipedia.org/wiki/Damerau–Levenshtein_distance
+
 Please note: Since this is the repository that goes along with my blog post series, only pull requests for bugs are accepted.
