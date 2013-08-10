@@ -32,7 +32,7 @@ function binarySearch(items, value){
 
     var startIndex  = 0,
         stopIndex   = items.length - 1,
-        middle      = Math.floor((stopIndex + startIndex)/2);
+        middle      = ~~((stopIndex + startIndex)/2);
         
     while(items[middle] != value && startIndex < stopIndex){
     
@@ -44,7 +44,7 @@ function binarySearch(items, value){
         }
         
         //recalculate middle
-        middle = Math.floor((stopIndex + startIndex)/2);    
+        middle = ~~((stopIndex + startIndex)/2);    
     }
 
     //make sure it's the right value
