@@ -1,0 +1,5 @@
+test if a number is even 
+
+even => true
+
+odd => false 

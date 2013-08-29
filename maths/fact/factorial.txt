@@ -1,0 +1,10 @@
+factorial n :
+
+this function calculate factorial(n) (n!) using the recursive declaration of fact(n)
+
+fact(n)
+{
+	if n = 0 return 1;
+	else return fact(n-1);
+}
+	 
