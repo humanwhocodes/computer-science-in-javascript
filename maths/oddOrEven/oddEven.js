@@ -1,7 +1,7 @@
 /* Created by SMAHI Zakaria <zakaria08esi@gmail.com>
 
 in August 29th, 2013 at 00:30 GMT
-test is a number is odd or even 
+test if a number is odd or even 
 
 */
 

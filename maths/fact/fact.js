@@ -2,6 +2,7 @@
 by Zakaria SMAHI <zakaria08esi@gmail.com>
 
 created on august 29th,2013 at 01:44 gmt 
+calculate the factorial of a number
 
 */
 

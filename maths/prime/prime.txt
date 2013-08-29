@@ -1,0 +1,7 @@
+test if a number 'n' is prime or not 
+pseudo-algorithm
+isPrime = new Boolean(true);
+for int j=2 to n-1 do
+	if (n%j==0) then isPrime<--false;
+end;
+return isPrime
