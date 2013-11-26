@@ -46,7 +46,7 @@ function selectionSort(items){
     var len = items.length,
         min, i, j;
 
-    for (i=0; i < len; i++){
+    for (i=0; i < len-1; i++){
     
         // set minimum to this position
         min = i;
