@@ -47,7 +47,7 @@ function bubbleSort(items){
         i, j;
 
     for (i=len-1; i >= 0; i--){
-        for (j=len-i; j >= 0; j--){
+        for (j=len-i-1; j >= 0; j--){
             if (items[j] < items[j-1]){
                 swap(items, j, j-1);
             }
