@@ -1,5 +1,5 @@
 /*
- * Insertion sort implementation in JavaScript
+ * Quicksort sort implementation in JavaScript
  * Copyright (c) 2012 Nicholas C. Zakas
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
