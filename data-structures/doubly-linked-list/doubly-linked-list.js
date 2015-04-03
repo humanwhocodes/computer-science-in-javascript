@@ -162,6 +162,7 @@ DoublyLinkedList.prototype = {
             
                 //skip over the item to remove
                 current.prev.next = current.next;
+                current.next.prev = current.prev;
             }
         
             //decrement the length
