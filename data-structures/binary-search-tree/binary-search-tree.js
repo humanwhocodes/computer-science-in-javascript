@@ -266,6 +266,12 @@ BinarySearchTree.prototype = {
                         replacement = current.left;
                         replacementParent = current;
                         
+                        if (!replacement.right) {
+                            replacement.right = current.right;
+                            parent.left = replacement;
+                            break;
+                        }
+                        
                         //find the right-most node
                         while(replacement.right !== null){
                             replacementParent = replacement;
