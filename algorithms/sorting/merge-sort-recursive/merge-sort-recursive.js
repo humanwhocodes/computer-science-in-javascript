@@ -22,7 +22,7 @@
  */
 
 /**
- * Merges to arrays in order based on their natural
+ * Merges two arrays in order based on their natural
  * relationship.
  * @param {Array} left The first array to merge.
  * @param {Array} right The second array to merge.
