@@ -1,0 +1,25 @@
+{
+  "name": "computer-science-in-javascript",
+  "version": "1.0.0",
+  "description": "Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript.",
+  "main": "README.md",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nzakas/computer-science-in-javascript.git"
+  },
+  "keywords": [
+    "cs",
+    "algorithms",
+    "data",
+    "structures"
+  ],
+  "author": "nzakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nzakas/computer-science-in-javascript/issues"
+  },
+  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme"
+}
