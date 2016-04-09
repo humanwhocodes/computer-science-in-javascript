@@ -57,53 +57,53 @@ BinarySearchTree.prototype = {
      * @return {Void}
      * @method add
      */
-    add: function (value){
+    add: function (value) {
     
         //create a new item object, place data in
-        var node = { 
-                value: value, 
-                left: null,
-                right: null 
-            },
+        var node = {
+            value: value,
+            left: null,
+            right: null
+        },
             
             //used to traverse the structure
             current;
     
         //special case: no items in the tree yet
-        if (this._root === null){
+        if (this._root === null) {
             this._root = node;
         } else {
             current = this._root;
-            
-            while(true){
+
+            while (true) {
             
                 //if the new value is less than this node's value, go left
-                if (value < current.value){
+                if (value < current.value) {
                 
                     //if there's no left, then the new node belongs there
-                    if (current.left === null){
+                    if (current.left === null) {
                         current.left = node;
                         break;
-                    } else {                    
+                    } else {
                         current = current.left;
                     }
                     
-                //if the new value is greater than this node's value, go right
-                } else if (value > current.value){
+                    //if the new value is greater than this node's value, go right
+                } else if (value > current.value) {
                 
                     //if there's no right, then the new node belongs there
-                    if (current.right === null){
+                    if (current.right === null) {
                         current.right = node;
                         break;
-                    } else {                    
+                    } else {
                         current = current.right;
                     }       
  
-                //if the new value is equal to the current one, just ignore
+                    //if the new value is equal to the current one, just ignore
                 } else {
                     break;
                 }
-            }        
+            }
         }
     },
     
@@ -113,23 +113,23 @@ BinarySearchTree.prototype = {
      * @return {Boolean} True if the value is found, false if not.
      * @method contains
      */
-    contains: function(value){
-    
-        var found       = false,
-            current     = this._root
+    contains: function (value) {
+
+        var found = false,
+            current = this._root
             
         //make sure there's a node to search
-        while(!found && current){
+        while (!found && current) {
         
             //if the value is less than the current node's, go left
-            if (value < current.value){
+            if (value < current.value) {
                 current = current.left;
                 
-            //if the value is greater than the current node's, go right
-            } else if (value > current.value){
+                //if the value is greater than the current node's, go right
+            } else if (value > current.value) {
                 current = current.right;
                 
-            //values are equal, found it!
+                //values are equal, found it!
             } else {
                 found = true;
             }
@@ -148,43 +148,43 @@ BinarySearchTree.prototype = {
      * @return {void}
      * @method remove
      */
-    remove: function(value){
-    
-        var found       = false,
-            parent      = null,
-            current     = this._root,
+    remove: function (value) {
+
+        var found = false,
+            parent = null,
+            current = this._root,
             childCount,
             replacement,
             replacementParent;
             
         //make sure there's a node to search
-        while(!found && current){
+        while (!found && current) {
         
             //if the value is less than the current node's, go left
-            if (value < current.value){
+            if (value < current.value) {
                 parent = current;
                 current = current.left;
                 
-            //if the value is greater than the current node's, go right
-            } else if (value > current.value){
+                //if the value is greater than the current node's, go right
+            } else if (value > current.value) {
                 parent = current;
                 current = current.right;
                 
-            //values are equal, found it!
+                //values are equal, found it!
             } else {
                 found = true;
             }
         }
         
         //only proceed if the node was found
-        if (found){
+        if (found) {
         
             //figure out how many children
             childCount = (current.left !== null ? 1 : 0) + (current.right !== null ? 1 : 0);
         
             //special case: the value is at the root
-            if (current === this._root){
-                switch(childCount){
+            if (current === this._root) {
+                switch (childCount) {
                 
                     //no children, just erase the root
                     case 0:
@@ -203,13 +203,13 @@ BinarySearchTree.prototype = {
                         replacement = this._root.left;
                         
                         //find the right-most leaf node to be the real new root
-                        while (replacement.right !== null){
+                        while (replacement.right !== null) {
                             replacementParent = replacement;
                             replacement = replacement.right;
                         }
          
                         //it's not the first node on the left
-                        if (replacementParent !== null){
+                        if (replacementParent !== null) {
                         
                             //remove the new root from it's previous position
                             replacementParent.right = replacement.left;
@@ -230,18 +230,18 @@ BinarySearchTree.prototype = {
                 
                 }        
 
-            //non-root values
+                //non-root values
             } else {
-            
-                switch (childCount){
+
+                switch (childCount) {
                 
                     //no children, just remove it from the parent
                     case 0:
                         //if the current value is less than its parent's, null out the left pointer
-                        if (current.value < parent.value){
+                        if (current.value < parent.value) {
                             parent.left = null;
                             
-                        //if the current value is greater than its parent's, null out the right pointer
+                            //if the current value is greater than its parent's, null out the right pointer
                         } else {
                             parent.right = null;
                         }
@@ -250,10 +250,10 @@ BinarySearchTree.prototype = {
                     //one child, just reassign to parent
                     case 1:
                         //if the current value is less than its parent's, reset the left pointer
-                        if (current.value < parent.value){
+                        if (current.value < parent.value) {
                             parent.left = (current.left === null ? current.right : current.left);
                             
-                        //if the current value is greater than its parent's, reset the right pointer
+                            //if the current value is greater than its parent's, reset the right pointer
                         } else {
                             parent.right = (current.left === null ? current.right : current.left);
                         }
@@ -267,11 +267,11 @@ BinarySearchTree.prototype = {
                         replacementParent = current;
                         
                         //find the right-most node
-                        while(replacement.right !== null){
+                        while (replacement.right !== null) {
                             replacementParent = replacement;
-                            replacement = replacement.right;                            
+                            replacement = replacement.right;
                         }
-                    
+
                         replacementParent.right = replacement.left;
                         
                         //assign children to the replacement
@@ -279,7 +279,7 @@ BinarySearchTree.prototype = {
                         replacement.left = current.left;
                         
                         //place the replacement in the right spot
-                        if (current.value < parent.value){
+                        if (current.value < parent.value) {
                             parent.left = replacement;
                         } else {
                             parent.right = replacement;
@@ -289,11 +289,11 @@ BinarySearchTree.prototype = {
                 
                 
                 }
-            
+
             }
-        
+
         }
-        
+
     },
     
     /**
@@ -302,13 +302,13 @@ BinarySearchTree.prototype = {
      * @return {int} The number of items in the tree.
      * @method size
      */
-    size: function(){
+    size: function () {
         var length = 0;
-        
-        this.traverse(function(node){
+
+        this.traverse(function (node) {
             length++;
         });
-        
+
         return length;
     },
     
@@ -317,13 +317,13 @@ BinarySearchTree.prototype = {
      * @return {Array} An array containing all of the data in the tree.
      * @method toArray
      */
-    toArray: function(){
+    toArray: function () {
         var result = [];
-        
-        this.traverse(function(node){
+
+        this.traverse(function (node) {
             result.push(node.value);
         });
-        
+
         return result;
     },
     
@@ -332,7 +332,7 @@ BinarySearchTree.prototype = {
      * @return {String} A string representation of the list.
      * @method toString
      */
-    toString: function(){
+    toString: function () {
         return this.toArray().toString();
     },
     
@@ -343,28 +343,78 @@ BinarySearchTree.prototype = {
      * @return {void}
      * @method traverse
      */
-    traverse: function(process){
-        
-        //helper function
-        function inOrder(node){
-            if (node){
-                
+    traverse: function (process, order) {
+        order = order || 'in';
+    
+        //helper functions: inOrder, preOrder, postOrder
+        function inOrder(node) {
+            if (node) {
+
                 //traverse the left subtree
-                if (node.left !== null){
+                if (node.left !== null) {
                     inOrder(node.left);
                 }            
-                
+
                 //call the process method on this node
                 process.call(this, node);
-            
+
                 //traverse the right subtree
-                if (node.right !== null){
+                if (node.right !== null) {
                     inOrder(node.right);
                 }
-            }        
+            }
         }
-        
-        //start with the root
-        inOrder(this._root);    
+
+        function preOrder(node) {
+            if (node) {
+
+                //call the process method on this node
+                process.call(this, node);
+
+                //traverse the left subtree
+                if (node.left !== null) {
+                    preOrder(node.left);
+                }            
+
+                //traverse the right subtree
+                if (node.right !== null) {
+                    preOrder(node.right);
+                }
+            }
+        }
+
+        function postOrder(node) {
+            if (node) {
+
+                //traverse the left subtree
+                if (node.left !== null) {
+                    postOrder(node.left);
+                }            
+
+                //traverse the right subtree
+                if (node.right !== null) {
+                    postOrder(node.right);
+                }
+            
+                //call the process method on this node
+                process.call(this, node);
+            }
+        }
+
+        switch (order) {
+            case 'pre':
+                //start with the root
+                preOrder(this._root);
+                break;
+            case 'post':
+                //start with the root
+                postOrder(this._root);
+                break;
+            case 'in':
+            default:
+                //start with the root
+                inOrder(this._root);
+                break;
+        }
     }
 };
