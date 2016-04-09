@@ -418,3 +418,5 @@ BinarySearchTree.prototype = {
         }
     }
 };
+
+module.exports = BinarySearchTree;
