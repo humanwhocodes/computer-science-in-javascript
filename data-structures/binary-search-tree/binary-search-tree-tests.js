@@ -1,3 +1,4 @@
+module.exports =  function(){
 var chai = require('chai');
 var expect = chai.expect;
 var BinarySearchTree = require('./binary-search-tree');
@@ -294,3 +295,5 @@ describe('Test Case for converting to an array', function () {
         });
     });
 });
+
+}

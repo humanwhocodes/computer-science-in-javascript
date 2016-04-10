@@ -4,7 +4,7 @@
   "description": "Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript.",
   "main": "README.md",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha test/test --reporter spec",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
