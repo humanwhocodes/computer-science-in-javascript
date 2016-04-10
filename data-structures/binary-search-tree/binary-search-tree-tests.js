@@ -119,7 +119,7 @@ describe(' Test Case for removing values', function () {
         tree.add(5);
         tree.add(10);
         tree.add(6);
-        
+
         tree.remove(10);
         tree.remove(5);
 
@@ -145,7 +145,7 @@ describe(' Test Case for removing values', function () {
         tree.add(5);
         tree.add(10);
         tree.add(6);
-        
+
         tree.remove(10);
 
         it('Should only have two items left.', function () {
@@ -162,7 +162,7 @@ describe(' Test Case for removing values', function () {
         tree.add(5);
         tree.add(10);
         tree.add(6);
-        
+
         tree.remove(6);
 
         it('should only have two items left.', function () {
@@ -179,7 +179,7 @@ describe(' Test Case for removing values', function () {
         tree.add(5);
         tree.add(10);
         tree.add(6);
-        
+
         tree.remove(6);
         tree.remove(5);
         tree.remove(10);
@@ -201,4 +201,96 @@ describe(' Test Case for removing values', function () {
         });
     });
 
+});
+
+
+//-------------------------------------------------------------------------
+// Test Case for converting to an array
+//-------------------------------------------------------------------------
+
+describe('Test Case for converting to an array', function () {
+    describe('testToArrayForEmptyList:', function () {
+        var tree = new BinarySearchTree();
+        var value = tree.toArray();
+
+        it('Should be an array.', function () {
+            expect(value).to.be.an('array');
+        });
+
+        it('Should be empty.', function () {
+            expect(value.length).to.equal(0);
+        });
+    });
+
+    describe('testToArrayForOneItemList:', function () {
+        var tree = new BinarySearchTree();
+
+        tree.add(5);
+        var value = tree.toArray();
+
+        it('Should be an array.', function () {
+            expect(value).to.be.an('array');
+        });
+
+        it('Should have 1 item.', function () {
+            expect(value.length).to.equal(1);
+        });
+
+        it('Should have 5 as the only item.', function () {
+            expect(value[0]).to.equal(5);
+        });
+    });
+
+    describe('testToArrayForTwoItemList:', function () {
+        var tree = new BinarySearchTree();
+
+        tree.add(5);
+        tree.add(10);
+        var value = tree.toArray();
+
+        it('Should be an array.', function () {
+            expect(value).to.be.an('array');
+        });
+
+        it('Should have 2 items.', function () {
+            expect(value.length).to.equal(2);
+        });
+
+        it('Should have 5 as the first item.', function () {
+            expect(value[0]).to.equal(5);
+        });
+
+        it('Should have 10 as the second item.', function () {
+            expect(value[1]).to.equal(10);
+        });
+    });
+
+    describe('testToArrayForMultipleItems:', function () {
+        var tree = new BinarySearchTree();
+
+        tree.add(55);
+        tree.add(10);
+        tree.add(29);
+        tree.add(40);
+        tree.add(10);
+        tree.add(5);
+        tree.add(16);
+        tree.add(25);
+
+        var value = tree.toArray();
+
+        it('Should be an array.', function () {
+            expect(value).to.be.an('array');
+        });
+
+        it('Should have 7 items.', function () {
+            expect(value.length).to.equal(7);
+        });
+
+        value.forEach(function (node) {
+            it('Should contain ' + node, function () {
+                expect(node).to.be.oneOf(value);
+            });
+        });
+    });
 });
