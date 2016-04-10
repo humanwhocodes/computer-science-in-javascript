@@ -1,5 +1,8 @@
 Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript. All of the code is available under an MIT License.
 
+[![Build Status](https://travis-ci.org/leewaygroups/computer-science-in-javascript.svg?branch=master)](https://travis-ci.org/leewaygroups/computer-science-in-javascript)
+[![Coverage Status](https://coveralls.io/repos/github/leewaygroups/computer-science-in-javascript/badge.svg?branch=Test)](https://coveralls.io/github/leewaygroups/computer-science-in-javascript?branch=Test)
+
 Each example has an associated blog post:
 
 Base64 Encoding
