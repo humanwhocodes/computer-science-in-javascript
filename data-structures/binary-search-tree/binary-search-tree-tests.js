@@ -85,15 +85,20 @@ describe('BinarySearchTree Test Case for contains()', function () {
 //-------------------------------------------------------------------------
     
 describe(' Test Case for removing values', function () {
-    var tree = new BinarySearchTree();
+    /*var tree = new BinarySearchTree();
     beforeEach(function () {
         tree = new BinarySearchTree();
         tree.add(5);
         tree.add(10);
         tree.add(6);
-    });
-    
+    });*/
+
     describe('testRemoveFirstItem', function () {
+        var tree = new BinarySearchTree();
+        tree.add(5);
+        tree.add(10);
+        tree.add(6);
+
         tree.remove(5);
 
         it('Should only have two items left.', function () {
@@ -110,6 +115,11 @@ describe(' Test Case for removing values', function () {
     });
 
     describe('testRemoveFirstItemToo', function () {
+        var tree = new BinarySearchTree();
+        tree.add(5);
+        tree.add(10);
+        tree.add(6);
+        
         tree.remove(10);
         tree.remove(5);
 
@@ -131,6 +141,11 @@ describe(' Test Case for removing values', function () {
     });
 
     describe('testRemoveMiddleItem', function () {
+        var tree = new BinarySearchTree();
+        tree.add(5);
+        tree.add(10);
+        tree.add(6);
+        
         tree.remove(10);
 
         it('Should only have two items left.', function () {
@@ -143,6 +158,11 @@ describe(' Test Case for removing values', function () {
     });
 
     describe('testRemoveLastItem', function () {
+        var tree = new BinarySearchTree();
+        tree.add(5);
+        tree.add(10);
+        tree.add(6);
+        
         tree.remove(6);
 
         it('should only have two items left.', function () {
@@ -150,11 +170,16 @@ describe(' Test Case for removing values', function () {
         });
 
         it('Should NOT contain 6', function () {
-            expect(tree.conatins(6)).to.equal(false);
+            expect(tree.contains(6)).to.equal(false);
         });
     });
 
     describe('testRemoveLastAll', function () {
+        var tree = new BinarySearchTree();
+        tree.add(5);
+        tree.add(10);
+        tree.add(6);
+        
         tree.remove(6);
         tree.remove(5);
         tree.remove(10);
