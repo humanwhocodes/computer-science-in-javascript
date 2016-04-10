@@ -4,7 +4,8 @@
   "description": "Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript.",
   "main": "README.md",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/nzakas/computer-science-in-javascript/issues"
   },
-  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme"
+  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5"
+  }
 }
