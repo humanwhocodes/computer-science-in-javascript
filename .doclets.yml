@@ -1,0 +1,7 @@
+files:
+  - algorithms/**/*.js
+  - data-structures/**/*.js
+  - encodings/**/*.js
+  
+articles:
+  - Readme: README.md
