@@ -53,6 +53,138 @@ describe("LinkedList", () => {
         });
     });
 
+    describe("insertBefore()", () => {
+        
+        it("should store an item when one item is inserted at the start", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertBefore(0, 0);
+            assertListValues(list, [0, 1, 2, 3]);
+        });
+
+        it("should store an item when one item is inserted in the middle", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertBefore(1.5, 1);
+            assertListValues(list, [1, 1.5, 2, 3]);
+        });
+
+        it("should store an item when one item is inserted at the end", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertBefore(2.5, 2);
+            assertListValues(list, [1, 2, 2.5, 3]);
+        });
+
+        it("should throw an error when the list is empty", () => {
+            assert.throws(() => {
+                list.insertBefore(1, 0);
+            }, "Index 0 does not exist in the list.");
+        });
+
+        it("should throw an error when the index is out of range", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+
+            assert.throws(() => {
+                list.insertBefore(1, 5);
+            }, "Index 5 does not exist in the list.");
+        });
+
+    });
+
+    describe("insertAfter()", () => {
+        
+        it("should store an item when one item is inserted at the start", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertAfter(1.5, 0);
+            assertListValues(list, [1, 1.5, 2, 3]);
+        });
+
+        it("should store an item when one item is inserted in the middle", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertAfter(2.5, 1);
+            assertListValues(list, [1, 2, 2.5, 3]);
+        });
+
+        it("should store an item when one item is inserted at the end", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+            
+            list.insertAfter(3.5, 2);
+            assertListValues(list, [1, 2, 3, 3.5]);
+        });
+
+        it("should throw an error when the list is empty", () => {
+            assert.throws(() => {
+                list.insertAfter(1, 0);
+            }, "Index 0 does not exist in the list.");
+        });
+
+        it("should throw an error when the index is out of range", () => {
+            list.add(1);
+            list.add(2);
+            list.add(3);
+            assertListValues(list, [1, 2, 3]);
+
+            assert.throws(() => {
+                list.insertAfter(1, 5);
+            }, "Index 5 does not exist in the list.");
+        });
+
+    });
+
+    describe("get()", () => {
+
+        it("should return the first item when get(0) is called", () => {
+            list.add(1);
+            assert.strictEqual(list.get(0), 1);
+        });
+
+        it("should return the correct value when get() is called multiple times", () => {
+            list.add(1);
+            list.add(2);
+            assert.strictEqual(list.get(0), 1);
+            assert.strictEqual(list.get(1), 2);
+        });
+
+        it("should return undefined when get() is called with -1", () => {
+            assert.strictEqual(list.get(-1), undefined);
+        });
+
+        it("should return undefined when get() is called with an out-of-range index in an empty list", () => {
+            assert.strictEqual(list.get(1), undefined);
+        });
+
+        it("should return undefined when get() is called with an out-of-range index in a non-empty list", () => {
+            list.add(1);
+            list.add(2);
+            assert.strictEqual(list.get(5), undefined);
+        });
+
+    });
+
     describe("remove()", () => {
         
         it("should remove an item when there is only one item", () => {
@@ -96,58 +228,65 @@ describe("LinkedList", () => {
             assertListValues(list, [2, 3]);
         });
 
-        it("should return null when multiple items are in the list and an out-of-bounds index is used", () => {
+        it("should throw an error when multiple items are in the list and an out-of-bounds index is used", () => {
             list.add(1);
             list.add(2);
             list.add(3);
             assertListValues(list, [1, 2, 3]);
             
             // remove unknown item
-            assert.strictEqual(list.remove(5), null);
-            assertListValues(list, [1, 2, 3]);
+            assert.throws(() => {
+                list.remove(5)
+            }, "Index 5 does not exist in the list.");
         });
 
-        it("should return null when multiple items are in the list and a negative index is used", () => {
+        it("should throw an error when multiple items are in the list and a negative index is used", () => {
             list.add(1);
             list.add(2);
             list.add(3);
             assertListValues(list, [1, 2, 3]);
             
             // remove unknown item
-            assert.strictEqual(list.remove(-1), null);
-            assertListValues(list, [1, 2, 3]);
+            assert.throws(() => {
+                list.remove(-1)
+            }, "Index -1 does not exist in the list.");
+        });
+
+        it("should throw an error when the list is empty", () => {
+            assert.throws(() => {
+                list.remove(0)
+            }, "Index 0 does not exist in the list.");
         });
     });
 
-    describe("get()", () => {
-        
-        it("should return the first item when get(0) is called", () => {
-            list.add(1);
-            assert.strictEqual(list.get(0), 1);
-        });
-        
-        it("should return the correct value when get() is called multiple times", () => {
-            list.add(1);
-            list.add(2);
-            assert.strictEqual(list.get(0), 1);
-            assert.strictEqual(list.get(1), 2);
+    describe("clear()", () => {
+
+        it("should not throw an error when the list has no items", () => {
+            assertListValues(list, []);
+
+            list.clear();
+            assertListValues(list, []);
         });
 
-        it("should return null when get() is called with -1", () => {
-            assert.strictEqual(list.get(-1), null);
+        it("should remove all items when the list has one item", () => {
+            list.add(1);
+            assertListValues(list, [1]);
+
+            list.clear();
+            assertListValues(list, []);
         });
 
-        it("should return null when get() is called with an out-of-range index in an empty list", () => {
-            assert.strictEqual(list.get(1), null);
-        });
-        
-        it("should return null when get() is called with an out-of-range index in a non-empty list", () => {
+        it("should remove all items when the list has multiple items", () => {
             list.add(1);
             list.add(2);
-            assert.strictEqual(list.get(5), null);
+            assertListValues(list, [1, 2]);
+
+            list.clear();
+            assertListValues(list, []);
         });
 
     });
+
 
     describe("size", () => {
         
