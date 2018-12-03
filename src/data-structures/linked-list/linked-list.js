@@ -9,7 +9,6 @@
  */
 const head = Symbol("head");
 
-
 /**
  * Represents a single item in a LinkedList.
  * @class LinkedListItem
@@ -509,24 +508,20 @@ class LinkedList {
      */
     *values(){
 
-        // special case: an empty list doesn't need to do anything
-        if (this[head] !== null) {
+        /*
+         * The `current` variable is used to iterate over the list items.
+         * It starts out pointing to the head and is overwritten inside
+         * of the loop below.
+         */
+        let current = this[head];
 
-            /*
-             * The `current` variable is used to iterate over the list items.
-             * It starts out pointing to the head and is overwritten inside
-             * of the loop below.
-             */
-            let current = this[head];
-
-            /*
-             * As long as `current` is not `null`, there is a piece of data
-             * to yield.
-             */
-            while (current !== null) {
-                yield current.data;
-                current = current.next;
-            }
+        /*
+         * As long as `current` is not `null`, there is a piece of data
+         * to yield.
+         */
+        while (current !== null) {
+            yield current.data;
+            current = current.next;
         }
     }
     
