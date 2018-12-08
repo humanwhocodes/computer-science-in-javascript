@@ -1,7 +1,7 @@
 /**
  * @fileoverview Doubly Linked List tests
  */
-
+/* global it, describe, beforeEach */
 "use strict";
 
 //-----------------------------------------------------------------------------
@@ -240,7 +240,7 @@ describe("DoublyLinkedList", () => {
             
             // remove unknown item
             assert.throws(() => {
-                list.remove(5)
+                list.remove(5);
             }, "Index 5 does not exist in the list.");
         });
 
@@ -252,13 +252,13 @@ describe("DoublyLinkedList", () => {
             
             // remove unknown item
             assert.throws(() => {
-                list.remove(-1)
+                list.remove(-1);
             }, "Index -1 does not exist in the list.");
         });
 
         it("should throw an error when the list is empty", () => {
             assert.throws(() => {
-                list.remove(0)
+                list.remove(0);
             }, "Index 0 does not exist in the list.");
         });
     });
