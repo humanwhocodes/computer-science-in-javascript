@@ -132,10 +132,11 @@ class LinkedList {
          * Special case: if `index` is `0`, then no traversal is needed
          * and we need to update `this[head]` to point to `item`. First,
          * set `item.next` to the current `this[head]` so the previous
-         * head of the list is now the second item in the list.
+         * head of the list is now the second item in the list. Then it's
+         * safe to update `this[head]` to point to `item`.
          */
         if (index === 0) {
-            item.next = this[head]
+            item.next = this[head];
             this[head] = item;
         } else {
 
