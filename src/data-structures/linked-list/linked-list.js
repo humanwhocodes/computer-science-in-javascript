@@ -52,7 +52,7 @@ class LinkedList {
         /**
          * Pointer to first item in the list.
          * @property head
-         * @type Object
+         * @type ?LinkedListItem
          * @private
          */
         this[head] = null;
