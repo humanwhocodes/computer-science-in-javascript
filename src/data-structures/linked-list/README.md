@@ -8,9 +8,10 @@ If you find this useful, please consider supporting my work with a [donation](ht
 
 A JavaScript implementation of a linked list. This class uses the conventions of built-in JavaScript collection objects, such as:
 
-1. Defining a `[Symbol.iterator]` method so each instance is iterable.
-1. Using the `size` getter instead of a `length` property to indicate that the size of the list is dynamically counted rather than stored.
+1. There is a `[Symbol.iterator]` method so each instance is iterable.
+1. The `size` getter property instead of a `length` data property to indicate that the size of the list is dynamically counted rather than stored.
 1. Defining a `values()` generator method.
+1. Returning `undefined` from `get()` when no such index exists.
 
 ## Usage
 
@@ -41,19 +42,16 @@ let count = list.size;
 // get the index of a value
 let index = list.indexOf("foo");
 
-// convert to an array
+// convert to an array using iterators
 let array1 = [...list.values()];
 let array2 = [...list];
 
-// remove an item at the given index
-list.remove(0);
+// remove an item at the given index and return the data that was removed
+let data = list.remove(0);
 
 // remove all items
 list.clear();
 ```
-
-
-
 
 ## Note on Code Style
 
