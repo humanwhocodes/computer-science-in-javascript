@@ -1,10 +1,12 @@
 {
-  "name": "computer-science-in-javascript",
-  "version": "1.0.0",
+  "name": "@humanwhocodes/computer-science-in-javascript",
+  "version": "2.0.0",
+  "private": true,
   "description": "Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript.",
   "main": "README.md",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/ tests/",
+    "test": "npm run lint && mocha tests/*/*/*.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/nzakas/computer-science-in-javascript/issues"
   },
-  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme"
+  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.10.0",
+    "mocha": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
 }
