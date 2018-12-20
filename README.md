@@ -13,7 +13,7 @@ Collection of classic computer science paradigms, algorithms, and approaches wri
 The most recent packages are found in these directories:
 
 * `src` - the implementation source code
-* `tests`` - tests for the implementation source code
+* `tests` - tests for the implementation source code
 
 These directories contain **old** implementations that will be replaced eventually, they are just here to avoid confusing people who find this repo through the old blog posts:
 
