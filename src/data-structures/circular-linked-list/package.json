@@ -1,0 +1,28 @@
+{
+  "name": "@humanwhocodes/circular-linked-list",
+  "version": "2.0.0",
+  "description": "A circular linked list implementation in JavaScript",
+  "main": "circular-linked-list.js",
+  "scripts": {
+    "test": "npx mocha ../../../tests/data-structures/circular-linked-list/circular-linked-list.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanwhocodes/computer-science-in-javascript.git"
+  },
+  "keywords": [
+    "circular linked list",
+    "linked list",
+    "data structure",
+    "iterable"
+  ],
+  "author": "Nicholas C. Zakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/humanwhocodes/computer-science-in-javascript/issues"
+  },
+  "homepage": "https://github.com/humanwhocodes/computer-science-in-javascript#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
