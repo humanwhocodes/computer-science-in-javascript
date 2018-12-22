@@ -1,0 +1,28 @@
+{
+  "name": "@humanwhocodes/binary-search-tree",
+  "version": "2.0.0",
+  "description": "A binary search tree implementation in JavaScript",
+  "main": "binary-search-tree.js",
+  "scripts": {
+    "test": "npx mocha ../../../tests/data-structures/binary-search-tree/binary-search-tree.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanwhocodes/computer-science-in-javascript.git"
+  },
+  "keywords": [
+    "binary search tree",
+    "linked list",
+    "data structure",
+    "iterable"
+  ],
+  "author": "Nicholas C. Zakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/humanwhocodes/computer-science-in-javascript/issues"
+  },
+  "homepage": "https://github.com/humanwhocodes/computer-science-in-javascript#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
