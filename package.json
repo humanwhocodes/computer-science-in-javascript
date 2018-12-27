@@ -6,7 +6,7 @@
   "main": "README.md",
   "scripts": {
     "lint": "eslint src/ tests/",
-    "test": "npm run lint && mocha tests/*/*/*.js"
+    "test": "npm run lint && mocha tests/**/*.js"
   },
   "repository": {
     "type": "git",

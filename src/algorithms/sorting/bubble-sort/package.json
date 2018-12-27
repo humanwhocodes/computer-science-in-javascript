@@ -1,0 +1,27 @@
+{
+  "name": "@humanwhocodes/bubble-sort",
+  "version": "2.0.0",
+  "description": "A bubble sort implementation in JavaScript",
+  "main": "bubble-sort.js",
+  "scripts": {
+    "test": "npx mocha ../../../../tests/algorithms/sorting/bubble-sort/bubble-sort.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanwhocodes/computer-science-in-javascript.git"
+  },
+  "keywords": [
+    "sorting",
+    "algorithm",
+    "bubble sort"
+  ],
+  "author": "Nicholas C. Zakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/humanwhocodes/computer-science-in-javascript/issues"
+  },
+  "homepage": "https://github.com/humanwhocodes/computer-science-in-javascript#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
