@@ -10,13 +10,13 @@
 const head = Symbol("head");
 
 /**
- * Represents a single item in a LinkedList.
- * @class LinkedListItem
+ * Represents a single node in a LinkedList.
+ * @class LinkedListNode
  */
-class LinkedListItem {
+class LinkedListNode {
 
     /**
-     * Creates a new instance of LinkedListItem.
+     * Creates a new instance of LinkedListNode.
      * @param {*} data The data to store in the node. 
      */
     constructor(data) {
@@ -29,9 +29,9 @@ class LinkedListItem {
         this.data = data;
 
         /**
-         * A pointer to the next item in the LinkedList.
+         * A pointer to the next node in the LinkedList.
          * @property next
-         * @type ?LinkedListItem
+         * @type ?LinkedListNode
          */
         this.next = null;
 
@@ -50,9 +50,9 @@ class LinkedList {
     constructor() {
 
         /**
-         * Pointer to first item in the list.
+         * Pointer to first node in the list.
          * @property head
-         * @type ?LinkedListItem
+         * @type ?LinkedListNode
          * @private
          */
         this[head] = null;
@@ -60,38 +60,38 @@ class LinkedList {
     
     /**
      * Appends some data to the end of the list. This method traverses
-     * the existing list and places the data at the end in a new item.
+     * the existing list and places the data at the end in a new node.
      * @param {*} data The data to add to the list.
      * @returns {void}
      */
     add(data) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be added to the end of the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be added to the end of the existing list.
          */
-        const item = new LinkedListItem(data);
+        const newNode = new LinkedListNode(data);
                 
-        //special case: no items in the list yet
+        //special case: no nodes in the list yet
         if (this[head] === null) {
 
             /*
-             * Because there are no items in the list, just set the
-             * `this[head]` pointer to the new item.
+             * Because there are no nodes in the list, just set the
+             * `this[head]` pointer to the new node.
              */
-            this[head] = item;
+            this[head] = newNode;
         } else {
 
             /*
-             * The `current` variable is used to track the item that is being
+             * The `current` variable is used to track the node that is being
              * used inside of the loop below. It starts out pointing to
              * `this[head]` and is overwritten inside of the loop.
              */
             let current = this[head];
 
             /*
-             * Follow each `next` pointer until the end. The last item in the
-             * list has `next` equal to `null`, so when we reach that item,
+             * Follow each `next` pointer until the end. The last node in the
+             * list has `next` equal to `null`, so when we reach that node,
              * we know we're at the end.
              */
             while (current.next !== null) {
@@ -99,17 +99,17 @@ class LinkedList {
             }
            
             /*
-             * At this point, `current` is equal to the last item in the list.
-             * Setting its `current.next` equal to item means adding a new item
+             * At this point, `current` is equal to the last node in the list.
+             * Setting its `current.next` equal to node means adding a new node
              * at the end of the list.
              */
-            current.next = item;            
+            current.next = newNode;            
         }
     }
     
     /**
      * Inserts some data into the middle of the list. This method traverses
-     * the existing list and places the data in a new item at a specific index.
+     * the existing list and places the data in a new node at a specific index.
      * @param {*} data The data to add to the list.
      * @param {int} index The zero-based index at which to insert the data.
      * @returns {void}
@@ -118,36 +118,36 @@ class LinkedList {
     insertBefore(data, index) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be inserted into the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be inserted into the existing list.
          */
-        const item = new LinkedListItem(data);
+        const newNode = new LinkedListNode(data);
                 
-        // special case: no items in the list yet
+        // special case: no nodes in the list yet
         if (this[head] === null) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
         /*
          * Special case: if `index` is `0`, then no traversal is needed
-         * and we need to update `this[head]` to point to `item`. First,
-         * set `item.next` to the current `this[head]` so the previous
-         * head of the list is now the second item in the list. Then it's
-         * safe to update `this[head]` to point to `item`.
+         * and we need to update `this[head]` to point to `node`. First,
+         * set `node.next` to the current `this[head]` so the previous
+         * head of the list is now the second node in the list. Then it's
+         * safe to update `this[head]` to point to `node`.
          */
         if (index === 0) {
-            item.next = this[head];
-            this[head] = item;
+            newNode.next = this[head];
+            this[head] = newNode;
         } else {
 
             /*
-             * The `current` variable is used to track the item that is being
+             * The `current` variable is used to track the node that is being
              * used inside of the loop below. It starts out pointing to
              * `this[head]` and is overwritten inside of the loop.
              *
              * The `previous` variable tracks one step behind `current`, which
-             * is necessary because we need to adjust the item at `index`-1's
-             * `next` pointer to point to the new item.
+             * is necessary because we need to adjust the node at `index`-1's
+             * `next` pointer to point to the new node.
              */
             let current = this[head],
                 previous = null;
@@ -160,8 +160,8 @@ class LinkedList {
             let i = 0;
 
             /*
-             * Traverse the list items similar to the `add()` method, but make
-             * sure to keep track of how many items have been visited and update
+             * Traverse the list nodes similar to the `add()` method, but make
+             * sure to keep track of how many nodes have been visited and update
              * the `previous` pointer in addition to `current`. When
              * `i` is the same as `index`, it means we've found the location to
              * insert the new data.
@@ -173,8 +173,8 @@ class LinkedList {
             }
            
             /*
-             * At this point, `current` is either the item to insert the new data
-             * before, or the last item in the list. The only way to tell is if
+             * At this point, `current` is either the node to insert the new data
+             * before, or the last node in the list. The only way to tell is if
              * `i` is still less than `index`, that means the index is out of range
              * and an error should be thrown.
              */
@@ -183,19 +183,19 @@ class LinkedList {
             }
 
             /*
-             * If code continues to execute here, it means `current` is the item
-             * to insert new data before and `previous` is the item to insert
-             * new data after. So `previous.next` must point to `item` and
-             * `item.next` must point to `current`.
+             * If code continues to execute here, it means `current` is the node
+             * to insert new data before and `previous` is the node to insert
+             * new data after. So `previous.next` must point to `node` and
+             * `node.next` must point to `current`.
              */
-            previous.next = item;
-            item.next = current;
+            previous.next = newNode;
+            newNode.next = current;
         }
     }
     
     /**
      * Inserts some data into the middle of the list. This method traverses
-     * the existing list and places the data in a new item after a specific index.
+     * the existing list and places the data in a new node after a specific index.
      * @param {*} data The data to add to the list.
      * @param {int} index The zero-based index after which to insert the data.
      * @returns {void}
@@ -204,18 +204,18 @@ class LinkedList {
     insertAfter(data, index) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be inserted into the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be inserted into the existing list.
          */
-        const item = new LinkedListItem(data);
+        const newNode = new LinkedListNode(data);
                 
-        // special case: no items in the list yet
+        // special case: no nodes in the list yet
         if (this[head] === null) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
         /*
-         * The `current` variable is used to track the item that is being
+         * The `current` variable is used to track the node that is being
          * used inside of the loop below. It starts out pointing to
          * `this[head]` and is overwritten inside of the loop.
          */
@@ -229,8 +229,8 @@ class LinkedList {
         let i = 0;
 
         /*
-         * Traverse the list items similar to the `add()` method, but make
-         * sure to keep track of how many items have been visited and update
+         * Traverse the list nodes similar to the `add()` method, but make
+         * sure to keep track of how many nodes have been visited and update
          * the `previous` pointer in addition to `current`. When
          * `i` is the same as `index`, it means we've found the location to
          * insert the new data.
@@ -241,8 +241,8 @@ class LinkedList {
         }
         
         /*
-         * At this point, `current` is either the item to insert the new data
-         * before, or the last item in the list. The only way to tell is if
+         * At this point, `current` is either the node to insert the new data
+         * before, or the last node in the list. The only way to tell is if
          * `i` is still less than `index`, that means the index is out of range
          * and an error should be thrown.
          */
@@ -251,22 +251,22 @@ class LinkedList {
         }
 
         /*
-         * If code continues to execute here, it means `current` is the item
+         * If code continues to execute here, it means `current` is the node
          * to insert new data after. So `current.next` must point to
-         * `item` for the data to be in the correct spot, but before that,
-         * `item.next` must point to `current.next` to ensure the list
+         * `node` for the data to be in the correct spot, but before that,
+         * `node.next` must point to `current.next` to ensure the list
          * remains intact.
          */
-        item.next = current.next;
-        current.next = item;
+        newNode.next = current.next;
+        current.next = newNode;
     }
     
     /**
      * Retrieves the data in the given position in the list.
-     * @param {int} index The zero-based index of the item whose data 
+     * @param {int} index The zero-based index of the node whose data 
      *      should be returned.
-     * @returns {*} The data in the "data" portion of the given item
-     *      or undefined if the item doesn't exist.
+     * @returns {*} The data in the "data" portion of the given node
+     *      or undefined if the node doesn't exist.
      */
     get(index) {
     
@@ -274,7 +274,7 @@ class LinkedList {
         if (index > -1) {
 
             /*
-             * The `current` variable is used to track the item that is being
+             * The `current` variable is used to track the node that is being
              * used inside of the loop below. It starts out pointing to
              * `this[head]` and is overwritten inside of the loop.
              */
@@ -288,8 +288,8 @@ class LinkedList {
             let i = 0;
 
             /*
-             * Traverse the list items similar to the `add()` method, but make
-             * sure to keep track of how many items have been visited and update
+             * Traverse the list nodes similar to the `add()` method, but make
+             * sure to keep track of how many nodes have been visited and update
              * the `previous` pointer in addition to `current`. When
              * `i` is the same as `index`, it means we've found the location to
              * insert the new data.
@@ -302,7 +302,7 @@ class LinkedList {
             /*
              * At this point, `current` might be null if we've gone past the
              * end of the list. In that case, we return `undefined` to indicate
-             * that the item at `index` was not found. If `current` is not
+             * that the node at `index` was not found. If `current` is not
              * `null`, then it's safe to return `current.data`.
              */
             return current !== null ? current.data : undefined;
@@ -320,7 +320,7 @@ class LinkedList {
     indexOf(data) {
     
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
@@ -334,17 +334,17 @@ class LinkedList {
         let index = 0;
         
         /*
-         * This loop checks each item in the list to see if it matches `data`.
+         * This loop checks each node in the list to see if it matches `data`.
          * If a match is found, it returns `index` immediately, exiting the
          * loop because there's no reason to keep searching. The search
-         * continues until there are no more items to search (when `current` is `null`).
+         * continues until there are no more nodes to search (when `current` is `null`).
          */
         while (current !== null) {
             if (current.data === data) {
                 return index;
             }
 
-            // traverse to the next item in the list
+            // traverse to the next node in the list
             current = current.next;
 
             // keep track of where we are
@@ -359,44 +359,42 @@ class LinkedList {
     }
     
     /**
-     * Removes the item from the given location in the list.
-     * @param {int} index The zero-based index of the item to remove.
+     * Removes the node from the given location in the list.
+     * @param {int} index The zero-based index of the node to remove.
      * @returns {*} The data in the given position in the list.
      * @throws {RangeError} If index is out of range.
      */
     remove(index) {
     
-        // special case: no items in the list
-        if (this[head] === null) {
+        // special cases: empty list or invalid `index`
+        if ((this[head] === null) || (index < 0)) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
-        // special case: `index` is an invalid value
-        if (index < 0) {
-            throw new RangeError(`Index ${index} does not exist in the list.`);
+        // special case: removing the first node
+        if (index === 0) {
+            
+            // temporarily store the data from the node
+            const data = this[head].data;
+            
+            // just replace the head with the next node in the list
+            this[head] = this[head].next;
+            
+            // return the data at the previous head of the list
+            return data;
         }
-
+        
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
         let current = this[head];
 
-        // special case: removing the first item
-        if (index === 0) {
-
-            // just replace the head with the next item in the list
-            this[head] = current.next;
-
-            // return the data at the previous head of the list
-            return current.data;
-        }
-
         /*
-         * The `previous` variable keeps track of the item just before
+         * The `previous` variable keeps track of the node just before
          * `current` in the loop below. This is necessary because removing
-         * an item means updating the previous item's `next` pointer.
+         * an node means updating the previous node's `next` pointer.
          */
         let previous = null;
 
@@ -408,8 +406,8 @@ class LinkedList {
         let i = 0;
 
         /*
-         * Traverse the list items similar to the `add()` method, but make
-         * sure to keep track of how many items have been visited and update
+         * Traverse the list nodes similar to the `add()` method, but make
+         * sure to keep track of how many nodes have been visited and update
          * the `previous` pointer in addition to `current`. When
          * `i` is the same as `index`, it means we've found the location to
          * remove.
@@ -419,7 +417,7 @@ class LinkedList {
             // save the value of current
             previous = current;
 
-            // traverse to the next item
+            // traverse to the next node
             current = current.next;
 
             // increment the count
@@ -427,12 +425,12 @@ class LinkedList {
         }
 
         /*
-         * If `current` isn't `null`, then that means we've found the item
+         * If `current` isn't `null`, then that means we've found the node
          * to remove.
          */
         if (current !== null) {
 
-            // skip over the item to remove
+            // skip over the node to remove
             previous.next = current.next;
 
             // return the value that was just removed from the list
@@ -447,7 +445,7 @@ class LinkedList {
     }
     
     /**
-     * Removes all items from the list.
+     * Removes all nodes from the list.
      * @returns {void}
      */
     clear() {
@@ -455,8 +453,8 @@ class LinkedList {
     }
 
     /**
-     * Returns the number of items in the list.
-     * @returns {int} The number of items in the list.
+     * Returns the number of nodes in the list.
+     * @returns {int} The number of nodes in the list.
      */
     get size() {
 
@@ -466,14 +464,14 @@ class LinkedList {
         }
 
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
         let current = this[head];
 
         /*
-         * The `count` variable is used to keep track of how many items have
+         * The `count` variable is used to keep track of how many nodes have
          * been visited inside the loop below. This is important because this
          * is the value to return from this method.
          */
@@ -481,7 +479,7 @@ class LinkedList {
 
         /*
          * As long as `current` is not `null`, that means we're not yet at the
-         * end of the list, so adding 1 to `count` and traverse to the next item.
+         * end of the list, so adding 1 to `count` and traverse to the next node.
          */
         while (current !== null) {
             count++;
@@ -490,7 +488,7 @@ class LinkedList {
 
         /*
          * When `current` is `null`, the loop is exited at the value of `count`
-         * is the number of items that were counted in the loop.
+         * is the number of nodes that were counted in the loop.
          */
         return count;
     }
@@ -504,13 +502,13 @@ class LinkedList {
     }
 
     /**
-     * Create an iterator that returns each item in the list.
+     * Create an iterator that returns each node in the list.
      * @returns {Iterator} An iterator on the list. 
      */
     *values(){
 
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
