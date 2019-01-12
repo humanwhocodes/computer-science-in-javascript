@@ -459,10 +459,9 @@ class CircularDoublyLinkedList {
         let i = 0;
 
         /*
-         * Traverse the list, keeping track of the previous position so
-         * that we can remove the node once it's found. The loop is exited
-         * when either the start of the list is encountered or `i` is no
-         * longer less than `index` (meaning we have found the node to remove).
+         * Traverse the list and exit the loop when either the start of the 
+         * list is encountered or `i` is no longer less than `index` (meaning
+         * we have found the node to remove).
          */
         do {
 
