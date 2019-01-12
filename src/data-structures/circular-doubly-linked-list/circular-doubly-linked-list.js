@@ -78,7 +78,7 @@ class CircularDoublyLinkedList {
          */
         const newNode = new CircularDoublyLinkedListNode(data);
                 
-        //special case: no items in the list yet
+        // special case: no items in the list yet
         if (this[head] === null) {
 
             /*
@@ -413,13 +413,8 @@ class CircularDoublyLinkedList {
      */
     remove(index) {
 
-        // special case: no nodes in the list
-        if (this[head] === null) {
-            throw new RangeError(`Index ${index} does not exist in the list.`);
-        }
-
-        // special case: `index` is an invalid value
-        if (index < 0) {
+        // special cases: no nodes in the list or `index` is an invalid value
+        if ((this[head] === null) || (index < 0)) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
@@ -457,13 +452,6 @@ class CircularDoublyLinkedList {
         }
 
         /*
-         * The `previous` variable keeps track of the node just before
-         * `current` in the loop below. This is necessary because removing
-         * an node means updating the previous node's `next` pointer.
-         */
-        let previous = null;
-
-        /*
          * The `i` variable is used to track how deep into the list we've
          * gone. This is important because it's the only way to know when
          * we've hit the `index` to remove.
@@ -477,9 +465,6 @@ class CircularDoublyLinkedList {
          * longer less than `index` (meaning we have found the node to remove).
          */
         do {
-
-            // save the value of current
-            previous = current;
 
             // traverse to the next node
             current = current.next;
@@ -496,8 +481,8 @@ class CircularDoublyLinkedList {
         if (current !== this[head]) {
 
             // skip over the node to remove
-            previous.next = current.next;
-            current.next.previous = previous;
+            current.previous.next = current.next;
+            current.next.previous = current.previous;
 
             // return the value that was just removed from the list
             return current.data;
