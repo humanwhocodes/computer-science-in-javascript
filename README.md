@@ -51,6 +51,14 @@ You can then run tests like this:
 $ npm test
 ```
 
+## Updated Blog Posts (2019)
+
+These are the most recent blog posts covering the most recent version of the code.
+
+### Data Structures
+
+* [Linked List](https://humanwhocodes.com/blog/2019/01/computer-science-in-javascript-linked-list/)
+
 ## Original Blog Posts
 
 At some point I will update these blog posts for the new implementations. For now, they still refer only to the 2009 version of this code.
