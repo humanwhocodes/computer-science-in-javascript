@@ -11,13 +11,13 @@ const head = Symbol("head");
 const tail = Symbol("tail");
 
 /**
- * Represents a single item in a DoublyLinkedList.
- * @class DoublyLinkedListItem
+ * Represents a single node in a DoublyLinkedList.
+ * @class DoublyLinkedListNode
  */
-class DoublyLinkedListItem {
+class DoublyLinkedListNode {
 
     /**
-     * Creates a new instance of DoublyLinkedListItem.
+     * Creates a new instance of DoublyLinkedListNode.
      * @param {*} data The data to store in the node. 
      */
     constructor(data) {
@@ -30,16 +30,16 @@ class DoublyLinkedListItem {
         this.data = data;
 
         /**
-         * A pointer to the next item in the DoublyLinkedList.
+         * A pointer to the next node in the DoublyLinkedList.
          * @property next
-         * @type ?DoublyLinkedListItem
+         * @type ?DoublyLinkedListNode
          */
         this.next = null;
 
         /**
-         * A pointer to the previous item in the DoublyLinkedList.
+         * A pointer to the previous node in the DoublyLinkedList.
          * @property previous
-         * @type ?DoublyLinkedListItem
+         * @type ?DoublyLinkedListNode
          */
         this.previous = null;
     }
@@ -57,64 +57,66 @@ class DoublyLinkedList {
     constructor() {
 
         /**
-         * Pointer to first item in the list.
+         * Pointer to first node in the list.
          * @property head
-         * @type ?DoublyLinkedListItem
+         * @type ?DoublyLinkedListNode
          * @private
          */
         this[head] = null;
 
         /**
-         * Pointer to last item in the list.
+         * Pointer to last node in the list.
          * @property tail
-         * @type ?DoublyLinkedListItem
+         * @type ?DoublyLinkedListNode
          * @private
          */
         this[tail] = null;
     }
     
     /**
-     * Appends some data to the end of the list. This method traverses
-     * the existing list and places the data at the end in a new item.
+     * Appends some data to the end of the list.
      * @param {*} data The data to add to the list.
      * @returns {void}
      */
     add(data) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be added to the end of the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be added to the end of the existing list.
          */
-        const item = new DoublyLinkedListItem(data);
+        const newNode = new DoublyLinkedListNode(data);
                 
-        //special case: no items in the list yet
+        // special case: no nodes in the list yet
         if (this[head] === null) {
 
             /*
-             * Because there are no items in the list, just set the
-             * `this[head]` and `this[tail]` pointers to the new item.
+             * Because there are no nodes in the list, just set the
+             * `this[head]` pointer to the new node.
              */
-            this[head] = item;
-            this[tail] = item;
+            this[head] = newNode;
         } else {
 
             /*
              * Unlike in a singly linked list, we have a direct reference to
-             * the last item in the list. Set the `next` pointer of the
-             * current last item to `item` in order to append the new data
-             * to the end of the list. Then, set `item.previous` to the current
-             * tail to ensure backwards tracking work. Last, reset `this[tail]`
-             * to `item` to ensure we are still tracking the last item correctly.
+             * the last node in the list. Set the `next` pointer of the
+             * current last node to `newNode` in order to append the new data
+             * to the end of the list. Then, set `newNode.previous` to the current
+             * tail to ensure backwards tracking work.
              */
-            this[tail].next = item;
-            item.previous = this[tail];
-            this[tail] = item;
+            this[tail].next = newNode;
+            newNode.previous = this[tail];
         }
+
+        /*
+         * Last, reset `this[tail]` to `newNode` to ensure we are still
+         * tracking the last node correctly.
+         */
+        this[tail] = newNode;
     }
     
     /**
      * Inserts some data into the middle of the list. This method traverses
-     * the existing list and places the data in a new item at a specific index.
+     * the existing list and places the data in a new node at a specific index.
      * @param {*} data The data to add to the list.
      * @param {int} index The zero-based index at which to insert the data.
      * @returns {void}
@@ -123,43 +125,43 @@ class DoublyLinkedList {
     insertBefore(data, index) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be inserted into the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be inserted into the existing list.
          */
-        const item = new DoublyLinkedListItem(data);
+        const newNode = new DoublyLinkedListNode(data);
                 
-        // special case: no items in the list yet
+        // special case: no nodes in the list yet
         if (this[head] === null) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
         /*
          * Special case: if `index` is `0`, then no traversal is needed
-         * and we need to update `this[head]` to point to `item`.
+         * and we need to update `this[head]` to point to `newNode`.
          */
         if (index === 0) {
 
             /*
-             * Ensure the new item's `next` property is pointed to the current
+             * Ensure the new node's `next` property is pointed to the current
              * head.
              */
-            item.next = this[head];
+            newNode.next = this[head];
 
             /*
              * The current head's `previous` property needs to point to the new
-             * item to ensure the list is traversable backwards.
+             * node to ensure the list is traversable backwards.
              */
-            this[head].previous = item;
+            this[head].previous = newNode;
 
             /*
-             * Now it's safe to set `this[head]` to the new item, effectively
-             * making the new item the first item in the list.
+             * Now it's safe to set `this[head]` to the new node, effectively
+             * making the new node the first node in the list.
              */
-            this[head] = item;
+            this[head] = newNode;
         } else {
 
             /*
-             * The `current` variable is used to track the item that is being
+             * The `current` variable is used to track the node that is being
              * used inside of the loop below. It starts out pointing to
              * `this[head]` and is overwritten inside of the loop.
              */
@@ -173,8 +175,8 @@ class DoublyLinkedList {
             let i = 0;
 
             /*
-             * Traverse the list items using `next` pointers, and make
-             * sure to keep track of how many items have been visited. When
+             * Traverse the list nodes using `next` pointers, and make
+             * sure to keep track of how many nodes have been visited. When
              * `i` is the same as `index`, it means we've found the location to
              * insert the new data.
              */
@@ -184,8 +186,8 @@ class DoublyLinkedList {
             }
            
             /*
-             * At this point, `current` is either the item to insert the new data
-             * before, or the last item in the list. The only way to tell is if
+             * At this point, `current` is either the node to insert the new data
+             * before, or the last node in the list. The only way to tell is if
              * `i` is still less than `index`, that means the index is out of range
              * and an error should be thrown.
              */
@@ -194,27 +196,27 @@ class DoublyLinkedList {
             }
 
             /*
-             * If code continues to execute here, it means `current` is the item
+             * If code continues to execute here, it means `current` is the node
              * to insert new data before.
              * 
-             * First, insert `item` after `current.previous` by updating
-             * `current.previous.next` and `item.previous`.
+             * First, insert `newNode` after `current.previous` by updating
+             * `current.previous.next` and `newNode.previous`.
              */
-            current.previous.next = item;
-            item.previous = current.previous;
+            current.previous.next = newNode;
+            newNode.previous = current.previous;
 
             /*
-             * Next, insert `current` after `item` by updating `item.next` and
+             * Next, insert `current` after `newNode` by updating `newNode.next` and
              * `current.previous`.
              */
-            item.next = current;
-            current.previous = item;
+            newNode.next = current;
+            current.previous = newNode;
         }
     }
     
     /**
      * Inserts some data into the middle of the list. This method traverses
-     * the existing list and places the data in a new item after a specific index.
+     * the existing list and places the data in a new node after a specific index.
      * @param {*} data The data to add to the list.
      * @param {int} index The zero-based index after which to insert the data.
      * @returns {void}
@@ -223,18 +225,18 @@ class DoublyLinkedList {
     insertAfter(data, index) {
     
         /*
-         * Create a new list item object and store the data in it.
-         * This item will be inserted into the existing list.
+         * Create a new list node object and store the data in it.
+         * This node will be inserted into the existing list.
          */
-        const item = new DoublyLinkedListItem(data);
+        const newNode = new DoublyLinkedListNode(data);
                 
-        // special case: no items in the list yet
+        // special case: no nodes in the list yet
         if (this[head] === null) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
         /*
-         * The `current` variable is used to track the item that is being
+         * The `current` variable is used to track the node that is being
          * used inside of the loop below. It starts out pointing to
          * `this[head]` and is overwritten inside of the loop.
          */
@@ -248,8 +250,8 @@ class DoublyLinkedList {
         let i = 0;
 
         /*
-         * Traverse the list items similar to the `add()` method, but make
-         * sure to keep track of how many items have been visited and update
+         * Traverse the list nodes similar to the `add()` method, but make
+         * sure to keep track of how many nodes have been visited and update
          * the `previous` pointer in addition to `current`. When
          * `i` is the same as `index`, it means we've found the location to
          * insert the new data.
@@ -260,8 +262,8 @@ class DoublyLinkedList {
         }
         
         /*
-         * At this point, `current` is either the item to insert the new data
-         * before, or the last item in the list. The only way to tell is if
+         * At this point, `current` is either the node to insert the new data
+         * before, or the last node in the list. The only way to tell is if
          * `i` is still less than `index`, that means the index is out of range
          * and an error should be thrown.
          */
@@ -270,37 +272,37 @@ class DoublyLinkedList {
         }
 
         /*
-         * If code continues to execute here, it means `current` is the item
+         * If code continues to execute here, it means `current` is the node
          * to insert new data after.
          */
         
         // special case: `current` is the tail, so reset `this[tail]`
         if (this[tail] === current) {
-            this[tail] = item;
+            this[tail] = newNode;
         } else {
 
             /* 
-             * Otherwise, insert `item` before `current.next` by updating
-             * `current.next.previous` and `item.item`.
+             * Otherwise, insert `newNode` before `current.next` by updating
+             * `current.next.previous` and `newNode.node`.
              */
-            current.next.previous = item;
-            item.next = current.next;
+            current.next.previous = newNode;
+            newNode.next = current.next;
         }
 
         /*
-         * Next, insert `item` after `current` by updating `item.previous` and
+         * Next, insert `newNode` after `current` by updating `newNode.previous` and
          * `current.next`.
          */
-        item.previous = current;
-        current.next = item;
+        newNode.previous = current;
+        current.next = newNode;
     }
     
     /**
      * Retrieves the data in the given position in the list.
-     * @param {int} index The zero-based index of the item whose data 
+     * @param {int} index The zero-based index of the node whose data 
      *      should be returned.
-     * @returns {*} The data in the "data" portion of the given item
-     *      or undefined if the item doesn't exist.
+     * @returns {*} The data in the "data" portion of the given node
+     *      or undefined if the node doesn't exist.
      */
     get(index) {
     
@@ -308,7 +310,7 @@ class DoublyLinkedList {
         if (index > -1) {
 
             /*
-             * The `current` variable is used to track the item that is being
+             * The `current` variable is used to track the node that is being
              * used inside of the loop below. It starts out pointing to
              * `this[head]` and is overwritten inside of the loop.
              */
@@ -322,11 +324,10 @@ class DoublyLinkedList {
             let i = 0;
 
             /*
-             * Traverse the list items similar to the `add()` method, but make
-             * sure to keep track of how many items have been visited and update
-             * the `previous` pointer in addition to `current`. When
-             * `i` is the same as `index`, it means we've found the location to
-             * insert the new data.
+             * Traverse the list nodes, but make sure to keep track of how many
+             * nodes have been visited and update the `previous` pointer in
+             * addition to `current`. When `i` is the same as `index`, it means
+             * we've found the location to insert the new data.
              */
             while ((current !== null) && (i < index)) {
                 current = current.next;
@@ -336,7 +337,7 @@ class DoublyLinkedList {
             /*
              * At this point, `current` might be null if we've gone past the
              * end of the list. In that case, we return `undefined` to indicate
-             * that the item at `index` was not found. If `current` is not
+             * that the node at `index` was not found. If `current` is not
              * `null`, then it's safe to return `current.data`.
              */
             return current !== null ? current.data : undefined;
@@ -354,7 +355,7 @@ class DoublyLinkedList {
     indexOf(data) {
     
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
@@ -368,17 +369,17 @@ class DoublyLinkedList {
         let index = 0;
         
         /*
-         * This loop checks each item in the list to see if it matches `data`.
+         * This loop checks each node in the list to see if it matches `data`.
          * If a match is found, it returns `index` immediately, exiting the
          * loop because there's no reason to keep searching. The search
-         * continues until there are no more items to search (when `current` is `null`).
+         * continues until there are no more nodes to search (when `current` is `null`).
          */
         while (current !== null) {
             if (current.data === data) {
                 return index;
             }
 
-            // traverse to the next item in the list
+            // traverse to the next node in the list
             current = current.next;
 
             // keep track of where we are
@@ -393,37 +394,28 @@ class DoublyLinkedList {
     }
     
     /**
-     * Removes the item from the given location in the list.
-     * @param {int} index The zero-based index of the item to remove.
+     * Removes the node from the given location in the list.
+     * @param {int} index The zero-based index of the node to remove.
      * @returns {*} The data in the given position in the list.
      * @throws {RangeError} If index is out of range.
      */
     remove(index) {
     
-        // special case: no items in the list
-        if (this[head] === null) {
+        // special cases: no nodes in the list or `index` is negative
+        if ((this[head] === null) || (index < 0)) {
             throw new RangeError(`Index ${index} does not exist in the list.`);
         }
 
-        // special case: `index` is an invalid value
-        if (index < 0) {
-            throw new RangeError(`Index ${index} does not exist in the list.`);
-        }
-
-        /*
-         * The `current` variable is used to iterate over the list items.
-         * It starts out pointing to the head and is overwritten inside
-         * of the loop below.
-         */
-        let current = this[head];
-
-        // special case: removing the first item
+        // special case: removing the first node
         if (index === 0) {
 
-            // just replace the head with the next item in the list
-            this[head] = current.next;
+            // store the data from the current head
+            const data = this[head].data;
 
-            // special case: there was only one item, so also reset `this[tail]`
+            // just replace the head with the next node in the list
+            this[head] = this[head].next;
+
+            // special case: there was only one node, so also reset `this[tail]`
             if (this[head] === null) {
                 this[tail] = null;
             } else {
@@ -431,8 +423,16 @@ class DoublyLinkedList {
             }
 
             // return the data at the previous head of the list
-            return current.data;
+            return data;
         }
+
+
+        /*
+         * The `current` variable is used to iterate over the list nodes.
+         * It starts out pointing to the head and is overwritten inside
+         * of the loop below.
+         */
+        let current = this[head];
 
         /*
          * The `i` variable is used to track how deep into the list we've
@@ -442,14 +442,14 @@ class DoublyLinkedList {
         let i = 0;
 
         /*
-         * Traverse the list items similar to the `add()` method, but make
-         * sure to keep track of how many items have been visited. When
+         * Traverse the list nodes similar to the `get()` method, but make
+         * sure to keep track of how many nodes have been visited. When
          * `i` is the same as `index`, it means we've found the location to
          * remove.
          */
         while ((current !== null) && (i < index)) {
 
-            // traverse to the next item
+            // traverse to the next node
             current = current.next;
 
             // increment the count
@@ -457,12 +457,12 @@ class DoublyLinkedList {
         }
 
         /*
-         * If `current` isn't `null`, then that means we've found the item
+         * If `current` isn't `null`, then that means we've found the node
          * to remove.
          */
         if (current !== null) {
 
-            // skip over the item to remove
+            // skip over the node to remove
             current.previous.next = current.next;
 
             /*
@@ -489,7 +489,7 @@ class DoublyLinkedList {
     }
     
     /**
-     * Removes all items from the list.
+     * Removes all nodes from the list.
      * @returns {void}
      */
     clear() {
@@ -500,8 +500,8 @@ class DoublyLinkedList {
     }
 
     /**
-     * Returns the number of items in the list.
-     * @returns {int} The number of items in the list.
+     * Returns the number of nodes in the list.
+     * @returns {int} The number of nodes in the list.
      */
     get size() {
 
@@ -511,14 +511,14 @@ class DoublyLinkedList {
         }
 
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
         let current = this[head];
 
         /*
-         * The `count` variable is used to keep track of how many items have
+         * The `count` variable is used to keep track of how many nodes have
          * been visited inside the loop below. This is important because this
          * is the value to return from this method.
          */
@@ -526,7 +526,7 @@ class DoublyLinkedList {
 
         /*
          * As long as `current` is not `null`, that means we're not yet at the
-         * end of the list, so adding 1 to `count` and traverse to the next item.
+         * end of the list, so adding 1 to `count` and traverse to the next node.
          */
         while (current !== null) {
             count++;
@@ -535,7 +535,7 @@ class DoublyLinkedList {
 
         /*
          * When `current` is `null`, the loop is exited at the value of `count`
-         * is the number of items that were counted in the loop.
+         * is the number of nodes that were counted in the loop.
          */
         return count;
     }
@@ -549,13 +549,13 @@ class DoublyLinkedList {
     }
 
     /**
-     * Create an iterator that returns each item in the list.
+     * Create an iterator that returns each node in the list.
      * @returns {Iterator} An iterator on the list. 
      */
     *values(){
 
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the head and is overwritten inside
          * of the loop below.
          */
@@ -572,13 +572,13 @@ class DoublyLinkedList {
     }
     
     /**
-     * Create an iterator that returns each item in the list in reverse order.
+     * Create an iterator that returns each node in the list in reverse order.
      * @returns {Iterator} An iterator on the list. 
      */
     *reverse(){
 
         /*
-         * The `current` variable is used to iterate over the list items.
+         * The `current` variable is used to iterate over the list nodes.
          * It starts out pointing to the tail and is overwritten inside
          * of the loop below.
          */
