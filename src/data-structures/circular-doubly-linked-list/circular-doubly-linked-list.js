@@ -617,14 +617,15 @@ class CircularDoublyLinkedList {
              * allows execution to stop and not pick up again until the iterator's
              * `next()` method is called again.
              * 
-             * It's possible for this loop to exit if the list is emptied
-             * in between calls to the iterator's `next()` method. That will
-             * cause `current` to be `null` and the iterator will close.
+             * It's not possible for this loop to exit. Even removing all nodes
+             * from the list using `remove()` or `clear()` will not cause the 
+             * loop to stop yield values. That's because `current.next` always
+             * has a value, even if it just points back to `current`.
              */
             do {
                 yield current.data;
                 current = current.next;
-            } while (current !== null);
+            } while (true);
         }
 
     }
