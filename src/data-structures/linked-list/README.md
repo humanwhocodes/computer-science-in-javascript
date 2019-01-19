@@ -13,6 +13,8 @@ A JavaScript implementation of a linked list. This class uses the conventions of
 1. Defining a `values()` generator method.
 1. Returning `undefined` from `get()` when no such index exists.
 
+Read the [blog post](https://humanwhocodes.com/blog/2019/01/computer-science-in-javascript-linked-list/) about the design of this class.
+
 ## Usage
 
 Use CommonJS to get access to the `LinkedList` constructor:
