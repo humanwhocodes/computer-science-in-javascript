@@ -13,6 +13,8 @@ A JavaScript implementation of a doubly linked list. This class uses the convent
 1. Defining a `values()` generator method.
 1. Returning `undefined` from `get()` when no such index exists.
 
+Read the [blog post](https://humanwhocodes.com/blog/2019/02/computer-science-in-javascript-doubly-linked-lists/) about the design of this class.
+
 ## Usage
 
 Use CommonJS to get access to the `DoublyLinkedList` constructor:

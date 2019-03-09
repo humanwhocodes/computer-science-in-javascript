@@ -58,6 +58,8 @@ These are the most recent blog posts covering the most recent version of the cod
 ### Data Structures
 
 * [Linked List](https://humanwhocodes.com/blog/2019/01/computer-science-in-javascript-linked-list/)
+* [Doubly-Linked List](https://humanwhocodes.com/blog/2019/02/computer-science-in-javascript-doubly-linked-lists/)
+* [Circular Doubly-Linked List](https://humanwhocodes.com/blog/2019/03/computer-science-in-javascript-circular-doubly-linked-lists/)
 
 ## Original Blog Posts
 
