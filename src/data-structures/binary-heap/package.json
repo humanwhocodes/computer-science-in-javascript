@@ -1,0 +1,27 @@
+{
+  "name": "@humanwhocodes/binary-heap",
+  "version": "2.0.0",
+  "description": "A doubly linked list implementation in JavaScript",
+  "main": "binary-heap.js",
+  "scripts": {
+    "test": "npx mocha ../../../tests/data-structures/binary-heap/binary-heap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humanwhocodes/computer-science-in-javascript.git"
+  },
+  "keywords": [
+    "heap",
+    "binary heap",
+    "data structure"
+  ],
+  "author": "Nicholas C. Zakas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/humanwhocodes/computer-science-in-javascript/issues"
+  },
+  "homepage": "https://github.com/humanwhocodes/computer-science-in-javascript#readme",
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
