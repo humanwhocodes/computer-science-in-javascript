@@ -361,6 +361,31 @@ describe("DoublyLinkedList", () => {
 
     });
 
+    describe("findIndex()", () => {
+        
+        it("should return -1 when the list is empty", () => {
+            assert.strictEqual(list.findIndex(() => true), -1);
+        });
+        
+        it("should return 0 when the matching value is found in the first item", () => {
+            list.add(1);
+            assert.strictEqual(list.findIndex(value => (value > 0)), 0);
+        });
+        
+        it("should return 1 when the matching value is second", () => {
+            list.add(1);
+            list.add(2);
+            assert.strictEqual(list.findIndex(value => (value > 1)), 1);
+        });
+
+        it("should return -1 when the list doesn't contain a match", () => {
+            list.add(1);
+            list.add(2);
+            assert.strictEqual(list.findIndex((value) => value > 2), -1);
+        });
+
+    });
+
     ["values", Symbol.iterator].forEach(method => {
 
         describe(String(method) + "()", () => {
