@@ -336,6 +336,31 @@ describe("DoublyLinkedList", () => {
 
     });
 
+    describe("find()", () => {
+        
+        it("should return undefined when the list is empty", () => {
+            assert.isUndefined(list.find(() => true));
+        });
+        
+        it("should return 1 when the matching value is found", () => {
+            list.add(1);
+            assert.strictEqual(list.find(value => (value > 0)), 1);
+        });
+        
+        it("should return 2 when the matching value is second", () => {
+            list.add(1);
+            list.add(2);
+            assert.strictEqual(list.find(value => (value > 1)), 2);
+        });
+
+        it("should return undefined when the list doesn't contain a match", () => {
+            list.add(1);
+            list.add(2);
+            assert.isUndefined(list.find((value) => value > 2));
+        });
+
+    });
+
     ["values", Symbol.iterator].forEach(method => {
 
         describe(String(method) + "()", () => {

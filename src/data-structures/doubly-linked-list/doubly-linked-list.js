@@ -392,6 +392,55 @@ class DoublyLinkedList {
          */
         return -1;
     }
+
+    /**
+     * Returns the first item that matches a given function.
+     * @param {Function} matcher A function returning true when an item matches
+     *      and false when an item doesn't match.
+     * @returns {*} The first item that returns true from the matcher, undefined
+     *      if no items match.
+     */
+    find(matcher) {
+    
+        /*
+         * The `current` variable is used to iterate over the list nodes.
+         * It starts out pointing to the head and is overwritten inside
+         * of the loop below.
+         */
+        let current = this[head];
+
+        /*
+         * The `index` variable is used to track how deep into the list we've
+         * gone. This is important because this is the value that is returned
+         * from this method.
+         */
+        let index = 0;
+        
+        /*
+         * This loop checks each node in the list to see if it matches.
+         * If a match is found, it returns the data immediately, exiting the
+         * loop because there's no reason to keep searching. The search
+         * continues until there are no more nodes to search (when `current` is `null`).
+         */
+        while (current !== null) {
+            if (matcher(current.data)) {
+                return current.data;
+            }
+
+            // traverse to the next node in the list
+            current = current.next;
+
+            // keep track of where we are
+            index++;
+        }
+
+        /*
+         * If execution gets to this point, it means we reached the end of the
+         * list and didn't find `data`. Just return `undefined` as the 
+         * "not found" value.
+         */
+        return undefined;
+    }
     
     /**
      * Removes the node from the given location in the list.

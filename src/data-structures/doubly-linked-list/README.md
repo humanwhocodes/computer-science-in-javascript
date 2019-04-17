@@ -11,6 +11,7 @@ A JavaScript implementation of a doubly linked list. This class uses the convent
 1. There is a `[Symbol.iterator]` method so each instance is iterable.
 1. The `size` getter property instead of a `length` data property to indicate that the size of the list is dynamically counted rather than stored.
 1. Defining a `values()` generator method.
+1. Defining a `find()` method for searching the list.
 1. Returning `undefined` from `get()` when no such index exists.
 
 Read the [blog post](https://humanwhocodes.com/blog/2019/02/computer-science-in-javascript-doubly-linked-lists/) about the design of this class.
@@ -43,6 +44,9 @@ let count = list.size;
 
 // get the index of a value
 let index = list.indexOf("foo");
+
+// search for a value
+let result = list.find(value => value.length > 3);
 
 // convert to an array using iterators
 let array1 = [...list.values()];
