@@ -1,7 +1,7 @@
 {
   "name": "@humanwhocodes/binary-heap",
-  "version": "2.0.0",
-  "description": "A doubly linked list implementation in JavaScript",
+  "version": "2.0.1",
+  "description": "A binary heap implementation in JavaScript",
   "main": "binary-heap.js",
   "scripts": {
     "test": "npx mocha ../../../tests/data-structures/binary-heap/binary-heap.js"
