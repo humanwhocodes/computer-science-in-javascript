@@ -1,5 +1,7 @@
 # Computer Science in JavaScript
 
+My fork of computer-science-in-javascript
+
 by [Nicholas C. Zakas](https://humanwhocodes.com)
 
 If you find this useful, please consider supporting my work with a [donation](https://humanwhocodes.com/donate).

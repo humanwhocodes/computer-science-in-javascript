@@ -1,5 +1,5 @@
 {
-  "name": "@humanwhocodes/computer-science-in-javascript",
+  "name": "anthonybrown/computer-science-in-javascript",
   "version": "2.0.0",
   "private": true,
   "description": "Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript.",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nzakas/computer-science-in-javascript.git"
+    "url": "git+https://github.com/anthonybrown/computer-science-in-javascript.git"
   },
   "keywords": [
     "cs",
@@ -21,9 +21,9 @@
   "author": "nzakas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nzakas/computer-science-in-javascript/issues"
+    "url": "https://github.com/anthonybrown/computer-science-in-javascript/issues"
   },
-  "homepage": "https://github.com/nzakas/computer-science-in-javascript#readme",
+  "homepage": "https://github.com/anthonybrown/computer-science-in-javascript#readme",
   "directories": {
     "test": "tests"
   },
