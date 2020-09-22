@@ -9,7 +9,7 @@
 // Requirements
 //-----------------------------------------------------------------------------
 
-const { DoublyLinkedList } = require("@humanwhocodes/doubly-linked-list");
+const { DoublyLinkedList } = require("../doubly-linked-list");
 
 //-----------------------------------------------------------------------------
 // Private
