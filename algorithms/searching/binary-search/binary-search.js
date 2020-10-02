@@ -44,7 +44,7 @@ function binarySearch(items, value){
         }
         
         //recalculate middle
-        middle = Math.floor((stopIndex + startIndex)/2);    
+        middle = startIndex + Math.floor((stopIndex - startIndex)/2);    
     }
 
     //make sure it's the right value
