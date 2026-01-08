@@ -45,12 +45,12 @@ function partition(items, left, right) {
     while (i <= j) {
 
         // if the item on the left is less than the pivot, continue right
-        while (items[i] < pivot) {
+        while (i <= right && items[i] < pivot) {
             i++;
         }
 
         // if the item on the right is greater than the pivot, continue left
-        while (items[j] > pivot) {
+        while (j >= left && items[j] > pivot) {
             j--;
         }
 
